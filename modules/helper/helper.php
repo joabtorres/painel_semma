@@ -107,7 +107,7 @@ class helper
      * @return string os caracteres gerados
      * @author Joab Torres <joabtorres1508@gmail.com>
      */
-    private function getGenerato($tamanho = 8) {
+    public function getGenerato($tamanho = 8) {
         $car_minusculo = 'q w e r t y u i o p a s d f g h j k l z x c v b n m';
         $car_numero = ' 0 1 2 3 4 5 6 7 8 9';
         $car_maiusculo = " Q W E R T Y U I O P A S D F G H J K L Z X C V B N M";

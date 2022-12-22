@@ -34,10 +34,9 @@ class usuarioModel extends database
     public function verificarEmail($email)
     {
         try {
-            $sql = $this->db->prepare("SELECT * FROM usuario WHERE email=:email AND status=1");
+            $sql = $this->db->prepare("SELECT * FROM usuario WHERE email=:email");
             $sql->bindValue(":email", $email);
             $sql->execute();
-
             if ($sql->rowCount() > 0) {
                 return $sql->fetch();
             } else {

@@ -7,11 +7,12 @@
 define("ENVIRONMENT", "development");
 
 //nome do projeto
-define("NAME_PROJECT", "Painel Adminstrativo da SEMMA Castanhal");
+define("NAME_PROJECT", "Painel Adminstrativo da Secretaria Múnicipal de Meio Ambiente de Castanhal");
 
 $config = array();
 //Raiz
 define("BASE_URL", "http://localhost/painel_semma/");
+
 if (ENVIRONMENT == 'development') {
     //Nome do banco
     $config['db']['dbname'] = 'semma';

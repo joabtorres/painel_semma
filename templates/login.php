@@ -27,7 +27,7 @@
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-primary text-white" for="iUsuario"><i
                                     class="fa fa-user"></i></span>
-                            <input type="text" class="form-control border-primary" placeholder="Usuario" id="iUsuario"
+                            <input type="email" class="form-control border-primary" placeholder="Usuario" id="iUsuario"
                                 name="nUsuario" required>
                             <div class="invalid-feedback text-end">
                                 Informe o usuário
@@ -41,10 +41,9 @@
                                 Informe a senha
                             </div>
                         </div>
-                        <?php $erro = true;
-                        if (isset($erro)) { ?>
+                        <?php if (!empty($error)) { ?>
                         <div class="alert bg-danger text-white alert-dismissible fade show" role="alert">
-                            Usuariio incorreto!
+                            <?php echo $error ?>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                         <?php } ?>
@@ -65,8 +64,8 @@
         <div class="container">
             <div class="row">
                 <div class="col text-center">
-                    <p class="mt-5 mb-3 text-muted">&copy; Copyright 2022 <br /> <a
-                            href="http://joabtorres.com.br" target="_blank" class="text-decoration-none">Joab Torres Alencar</a></p>
+                    <p class="mt-5 mb-3 text-muted">&copy; Copyright 2022 <br /> <a href="http://joabtorres.com.br"
+                            target="_blank" class="text-decoration-none">Joab Torres Alencar</a></p>
                 </div>
             </div>
         </div>
