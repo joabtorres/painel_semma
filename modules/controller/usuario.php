@@ -17,4 +17,9 @@ class usuario{
             header("location: $url");
         }
     }
+    public function logar(){
+        if(filter_input(INPUT_POST, 'nUsuario')){
+            $usuarioModel = usuarioModel::getInstance();
+        }
+    }
 }

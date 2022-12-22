@@ -1,0 +1,22 @@
+body {
+    background-color: #f4f4f4;
+}
+
+.input-group-text {
+    border: 1px;
+}
+
+#telaLogin {
+    height: calc(100vh - 120px);
+}
+
+#telaLogin input[type=email] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0
+}
+
+#telaLogin input[type=password] {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0
+}
