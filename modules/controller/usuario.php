@@ -49,6 +49,12 @@ class usuario
             return $_SESSION['usuario']['id'];
         }
     }
+    public function getNome()
+    {
+        if (isset($_SESSION['usuario']) && $_SESSION['usuario']['nome'] > 0) {
+            return $_SESSION['usuario']['nome'];
+        }
+    }
     public function checkUser()
     {
         if (isset($_SESSION['usuario']) && $_SESSION['usuario']['status'] > 0) {

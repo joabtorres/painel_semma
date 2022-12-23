@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> <?php echo NAME_PROJECT ?> </title>
+    <link rel="icon" type="image/gif" href="<?php echo BASE_URL ?>assets/image/icon.png" sizes="32x32" />
     <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/fontawesome/css/fontawesome.min.css" />
     <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/fontawesome/css/regular.min.css" />
@@ -14,6 +15,7 @@
     <script src="<?php echo BASE_URL ?>assets/bootstrap/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/css/style.css" />
     <script src="<?php echo BASE_URL ?>assets/js/jquery-3.6.3.min.js"></script>
+    <script>base_url = '<?php echo BASE_URL ?>';</script>
 </head>
 
 <body>
@@ -114,24 +116,20 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
                         <li class="nav-item dropdown ">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                Dropdown
+                                <i class="fa-solid fa-user me-1"></i>
+                                <?php echo $viewData['nome'] ?>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="usuario/editar"><i
+                                            class="fa-solid fa-user-pen me-1"></i>Editar Perfil</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                <li><a class="dropdown-item" href="<?php echo BASE_URL ?>sair"> <i
+                                            class="fa-solid fa-arrow-right-from-bracket me-1"></i> Sair</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -140,6 +138,17 @@
         </nav>
         <?php template::getInstance()->loadViewInTemplate($viewName, $viewData); ?>
     </div>
+    <footer id="footer_painel" class="text-end">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <hr class="mb-0 mt-2" />
+                    <p class="text-muted">&copy; Copyright 2022 - <a href="http://joabtorres.com.br" target="_blank"
+                            class="text-decoration-none">Joab Torres Alencar</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
     <script src="<?php echo BASE_URL ?>assets/js/script.js"></script>
 </body>
 
