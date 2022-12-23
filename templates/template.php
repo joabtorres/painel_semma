@@ -31,7 +31,6 @@
                     <i class="fa-solid fa-mug-hot me-1"></i>
                     Página Inícial
                 </a>
-
             </li>
             <li>
                 <a href="#" class="nav-link" data-bs-toggle="collapse" data-bs-target="#colapseLegislacao"
@@ -88,22 +87,55 @@
                     <li> <a href="#"><i class="fa-solid fa-magnifying-glass me-1 ms-3"></i>Consultar</a></li>
                 </ul>
             </li>
-
+            <li class="nav-item">
+                <a href="<?php BASE_URL ?>sair" class="nav-link" aria-current="page">
+                    <i class="fa-solid fa-arrow-right-from-bracket me-1"></i>
+                    Sair
+                </a>
+            </li>
         </ul>
         <footer class="text-center ">
-            <hr/>
-            <p class="text-muted">&copy; Copyright 2022 <br /> <a href="http://joabtorres.com.br"
-                    target="_blank" class="text-decoration-none">Joab Torres Alencar</a></p>
+            <hr />
+            <p class="text-muted">&copy; Copyright 2022 <br /> <a href="http://joabtorres.com.br" target="_blank"
+                    class="text-decoration-none">Joab Torres Alencar</a></p>
         </footer>
     </div>
     <div id="content">
-        <nav class="navbar shadow bg-light rounded">
+        <nav class="navbar navbar-expand-lg shadow bg-light rounded">
             <div class="container-fluid">
                 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar"
                     aria-controls="sidebar">
                     <i class="fa-solid fa-bars"></i> Menu
                 </button>
-
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li class="nav-item dropdown ">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Dropdown
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
         <?php template::getInstance()->loadViewInTemplate($viewName, $viewData); ?>

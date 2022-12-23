@@ -25,7 +25,7 @@ class usuario
             if (!empty($resultado)) {
                 if (password_verify($arrayCad['senha'], $resultado['senha'])) {
                     $this->IniciarSessao($resultado);
-                    $url = BASE_URL ;
+                    $url = BASE_URL;
                     header("location: $url");
                 } else {
                     return 'Usuário/Senha Incorreto';
@@ -43,7 +43,8 @@ class usuario
         $_SESSION['usuario']['nome'] = $usuario['nome'];
         $_SESSION['usuario']['status'] = $usuario['status'];
     }
-    public function getId(){
+    public function getId()
+    {
         if (isset($_SESSION['usuario']) && $_SESSION['usuario']['id'] > 0) {
             return $_SESSION['usuario']['id'];
         }
@@ -56,5 +57,13 @@ class usuario
             $url = BASE_URL . 'login';
             header("location: $url");
         }
+    }
+    public function sair()
+    {
+        if (isset($_SESSION['usuario'])) {
+            $_SESSION = array();
+        }
+        $url = BASE_URL . 'login';
+        header("location: $url");
     }
 }

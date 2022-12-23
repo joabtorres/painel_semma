@@ -1,5 +1,7 @@
 <?php
-
+router::get('sair', function ($ags) {
+    usuario::getInstance()->sair();
+});
 router::get('login', function ($ags) {
     $view = template::getInstance();
     $dados = array();
