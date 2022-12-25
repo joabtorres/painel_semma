@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 23-Dez-2022 às 15:38
--- Versão do servidor: 10.4.25-MariaDB
--- versão do PHP: 8.1.10
+-- Tempo de geração: 26-Dez-2022 às 00:25
+-- Versão do servidor: 10.4.21-MariaDB
+-- versão do PHP: 8.0.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -94,7 +94,8 @@ INSERT INTO `legislacoes` (`cod`, `categoria`, `esfera`, `numero`, `ano`, `data`
 (18, 'Resoluções', 'CMMA', '006', 2022, '10/03/2022', 'Alterar os Itens 1.1.7 do ANEXO II, III e IV da Resolução CMMA n° 004/2021, para acrescentar a Certidão de Uso e Ocupação do Solo, o qual passa a vigorar com a seguinte alteração: 1. Documentos Administrativos: 1.1. Obrigatórios: 1.1.7 Alvará de Localização e Funcionamento ou Certidão de Uso e Ocupação do Solo;', 'https://drive.google.com/file/d/1aaPxXWGxwjn9k4z5DdcxzpgeszNMqL3b/view?usp=drive_web', ''),
 (19, 'Resoluções', 'COEMA', '162', 2021, '02/02/2021', 'Regulamenta as atividades de impacto ambiental local, para fins de licenciamento ambiental, de competência dos Municípios no âmbito do Estado do Pará.', 'https://www.ioepa.com.br/pages/2021/2021.02.19.DOE.pdf', 'https://www.semas.pa.gov.br/legislacao/files/pdf/25758.pdf'),
 (20, 'Portarias', 'Municipal', '001', 2022, '11/01/2022', 'Fica determinado, a partir de 11 de janeiro de 2022, a realização de expediente interno pela Coordenadoria de Licenciamento Ambiental - CLA às sextas-feiras.', 'https://drive.google.com/file/d/17pz3HoyaTKGjFMLWEZRb65S7ALbvT2_6/view', ''),
-(21, 'Portarias', 'Municipal', '1479', 2022, '01/09/2022', 'Considerando, o ofício nº575/2022/GAB/COFISC/SEMMA/PMC, constante do Processo nº2022/8/6083;Art. 1º - Lotar o servidor Luiz Henrique Vilela Araújo, cargo Veterinário, na Coordenadoria de Fiscalização Ambiental da Secretaria Municipal de Meio Ambiente.', 'https://www.google.com/url?q=https://drive.google.com/file/d/1vXq-Rn_YpsxVci6ACzOeGinSqmpMDjz5/view&sa=D&source=editors&ust=1670867927629001&usg=AOvVaw0WjVNgIgLmmBW1R3louMe7', 'https://www.google.com/url?q=https://drive.google.com/file/d/1GJPeKgNhE0s-SNqpFxWVj-wKH6EJxzV3/view?usp%3Dsharing&sa=D&source=editors&ust=1670867927629048&usg=AOvVaw2q92UvqRn92QU4KMfBzWMM');
+(21, 'Portarias', 'Municipal', '1479', 2022, '01/09/2022', 'Considerando, o ofício nº575/2022/GAB/COFISC/SEMMA/PMC, constante do Processo nº2022/8/6083;Art. 1º - Lotar o servidor Luiz Henrique Vilela Araújo, cargo Veterinário, na Coordenadoria de Fiscalização Ambiental da Secretaria Municipal de Meio Ambiente.', 'https://www.google.com/url?q=https://drive.google.com/file/d/1vXq-Rn_YpsxVci6ACzOeGinSqmpMDjz5/view&sa=D&source=editors&ust=1670867927629001&usg=AOvVaw0WjVNgIgLmmBW1R3louMe7', 'https://www.google.com/url?q=https://drive.google.com/file/d/1GJPeKgNhE0s-SNqpFxWVj-wKH6EJxzV3/view?usp%3Dsharing&sa=D&source=editors&ust=1670867927629048&usg=AOvVaw2q92UvqRn92QU4KMfBzWMM'),
+(27, 'Resoluções', 'Municipal', '123', 1231, '18/12/2022', 'asasasdas', 'uploads/legislacao/e73cbd8a82ab08207a33450fed76528a.pdf', 'uploads/legislacao/951f977d2d2679db5503e2c14c7f84e4.pdf');
 
 -- --------------------------------------------------------
 
@@ -3140,7 +3141,7 @@ ALTER TABLE `formularios`
 -- AUTO_INCREMENT de tabela `legislacoes`
 --
 ALTER TABLE `legislacoes`
-  MODIFY `cod` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `cod` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de tabela `licencas_emitidas`

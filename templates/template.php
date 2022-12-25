@@ -8,13 +8,21 @@
     <title> <?php echo NAME_PROJECT ?> </title>
     <link rel="icon" type="image/gif" href="<?php echo BASE_URL ?>assets/image/icon.png" sizes="32x32" />
     <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/bootstrap/css/bootstrap.min.css" />
+     <!-- Date datepicker CSS -->
+    <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/css/jquery-ui.min.css">
     <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/fontawesome/css/fontawesome.min.css" />
     <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/fontawesome/css/regular.min.css" />
     <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/fontawesome/css/solid.min.css" />
     <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/fontawesome/css/brands.min.css" />
-    <script src="<?php echo BASE_URL ?>assets/bootstrap/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/css/style.css" />
+    <!-- jquery -->
     <script src="<?php echo BASE_URL ?>assets/js/jquery-3.6.3.min.js"></script>
+    <!-- bootstrap -->
+    <script src="<?php echo BASE_URL ?>assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+     <!-- Date datepicker JS -->
+    <script src="<?php echo BASE_URL ?>assets/js/jquery-ui.min.js"></script>
+    <!-- select2 JS -->
+    <script defer src="<?php echo BASE_URL ?>assets/js/select2.min.js"></script>
     <script>base_url = '<?php echo BASE_URL ?>';</script>
 </head>
 
@@ -41,7 +49,7 @@
                     Legislação
                 </a>
                 <ul class="collapse" id="colapseLegislacao">
-                    <li> <a href="#"><i class="fa-regular fa-square-plus me-1 ms-3"></i> Cadastrar</a></li>
+                    <li> <a href="<?php echo BASE_URL?>legislacao/cadastrar"><i class="fa-regular fa-square-plus me-1 ms-3"></i> Cadastrar</a></li>
                     <li> <a href="#"><i class="fa-solid fa-magnifying-glass me-1 ms-3"></i>Consultar</a></li>
                 </ul>
             </li>
@@ -149,6 +157,7 @@
             </div>
         </div>
     </footer>
+    <script src="<?php echo BASE_URL ?>assets/js/jquery.mask.min.js"></script>  
     <script src="<?php echo BASE_URL ?>assets/js/script.js"></script>
 </body>
 
