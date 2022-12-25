@@ -73,7 +73,7 @@ class legislacao
             }
 
         } else {
-            return filter_input(INPUT_POST, 'nLinkDiario', FILTER_SANITIZE_SPECIAL_CHARS);
+            return $url_file;
         }
     }
 }
