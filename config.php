@@ -11,7 +11,7 @@ define("NAME_PROJECT", "Painel Adminstrativo da Secretaria Múnicipal de Meio Am
 
 $config = array();
 //Raiz
-define("BASE_URL", "http://localhost/painel_semma/");
+define("BASE_URL", "http://localhost/semma/painel_semma/");
 define("BASE_URL_SITE", "http://localhost/semma/");
 
 if (ENVIRONMENT == 'development') {

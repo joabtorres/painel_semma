@@ -37,7 +37,7 @@
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
-                <a href="<?php BASE_URL ?>" class="nav-link" aria-current="page">
+                <a href="<?php echo BASE_URL ?>" class="nav-link" aria-current="page">
                     <i class="fa-solid fa-mug-hot me-1"></i>
                     Página Inícial
                 </a>
@@ -50,7 +50,7 @@
                 </a>
                 <ul class="collapse" id="colapseLegislacao">
                     <li> <a href="<?php echo BASE_URL?>legislacao/cadastrar"><i class="fa-regular fa-square-plus me-1 ms-3"></i> Cadastrar</a></li>
-                    <li> <a href="#"><i class="fa-solid fa-magnifying-glass me-1 ms-3"></i>Consultar</a></li>
+                    <li> <a href="<?php echo BASE_URL?>legislacao"><i class="fa-solid fa-magnifying-glass me-1 ms-3"></i>Consultar</a></li>
                 </ul>
             </li>
             <li>
