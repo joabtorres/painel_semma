@@ -123,15 +123,9 @@
                                             <?php echo !empty($indice['data']) ? $indice['data'] : ''; ?>
                                         </td>
                                         <td class="table-acao text-center">
-                                                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal"
-                                                data-bs-target="#modal_vizualizar_<?php echo md5($indice['cod']) ?>"
-                                                title="Visualizar"><i class="fa fa-eye"></i></button>
-                                            <a class="btn btn-primary btn-sm"
-                                                href="<?php echo BASE_URL . 'protocolo/editar/' . md5($indice['cod']); ?>"
-                                                title="Editar"><i class="fa fa-pencil-alt"></i></a>
-                                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                                data-bs-target="#modal_relatorio_<?php echo md5($indice['cod']) ?>"
-                                                title="Excluir"><i class="fa fa-trash"></i></button>
+                                                <button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal"data-bs-target="#modal_vizualizar_<?php echo md5($indice['cod']) ?>" title="Visualizar"><i class="fa fa-eye"></i></button>
+                                                <a class="btn btn-outline-primary btn-sm" href="<?php echo BASE_URL . 'legislacao/editar/' . md5($indice['cod']); ?>" title="Editar"><i class="fa fa-pencil-alt"></i></a>
+                                                <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal"data-bs-target="#modal_relatorio_<?php echo md5($indice['cod']) ?>" title="Excluir"><i class="fa fa-trash"></i></button>
                                         </td>
                                     </tr>
                                     <?php
@@ -217,26 +211,44 @@
             ?>        
             <!--MODAL - ESTRUTURA BÁSICA-->
             <section class="modal fade" id="modal_relatorio_<?php echo md5($indice['cod']) ?>" tabindex="-1" role="dialog">
-                <article class="modal-dialog modal-md modal-dialog-centered" role="document">
+                <article class="modal-dialog modal-lg modal-dialog-centered" role="document">
                     <section class="modal-content">
                         <header class="modal-header bg-danger text-while">
                             <h5 class="modal-title text-white">Deseja remover este registro?</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </header>
-                        <article class="modal-body">
-                            <ul class="list-unstyled">
-                                <li><b>Categoria: </b> <?php echo !empty($indice['categoria']) ? $indice['categoria'] : '' ?>;</li>
-                                <li><b>Esfera: </b> <?php echo !empty($indice['esfera']) ? $indice['esfera'] : '0' ?>;</li>
-                                <li><b>Número: </b> <?php echo !empty($indice['numero']) ? $indice['numero'] : ''; ?>;</li>
-                                <li><b>Ano: </b> <?php echo !empty($indice['ano']) ? $indice['ano'] : ''; ?>;</li>
-                                <li><b>Data: </b> <?php echo !empty($indice['data']) ? $indice['data'] : ''; ?>;</li>
-                                <li><b>Ementa: </b> <?php echo!empty($indice['ementa']) ? $indice['ementa'] : ''; ?></li>
-                            </ul>
-                            <p class="text-justify text-danger"><span class="font-bold">OBS : </span> Ao clicar em "Excluir", este registro e todos registos relacionados ao mesmo deixaram de existir no sistema.</p>
+                        <article class="modal-body p-1">
+                        <table class="table align-middle m-0">
+                                <tr>
+                                    <td class="bg-light" width="150px">Categoria:</td>
+                                    <td><?php echo !empty($indice['categoria']) ? $indice['categoria'] : '' ?></td>
+                                </tr>
+                                <tr>
+                                    <td class="bg-light">Esfera:</td>
+                                    <td><?php echo !empty($indice['esfera']) ? $indice['esfera'] : '' ?></td>
+                                </tr>
+                                <tr>
+                                    <td class="bg-light">Número:</td>
+                                    <td><?php echo !empty($indice['numero']) ? $indice['numero'] : '' ?></td>
+                                </tr>
+                                <tr>
+                                    <td class="bg-light">Ano:</td>
+                                    <td><?php echo !empty($indice['ano']) ? $indice['ano'] : '' ?></td>
+                                </tr>
+                                <tr>
+                                    <td class="bg-light">Data:</td>
+                                    <td><?php echo !empty($indice['data']) ? $indice['data'] : '' ?></td>
+                                </tr>
+                                <tr>
+                                    <td class="bg-light">Ementa:</td>
+                                    <td><?php echo !empty($indice['ementa']) ? $indice['ementa'] : '' ?></td>
+                                </tr>                                
+                            </table>
+                            <p class="text-justify text-danger m-2"><span class="font-bold">OBS : </span> Ao clicar em "Excluir", este registro e todos registos relacionados ao mesmo deixaram de existir no sistema.</p>
                         </article>
                         <footer class="modal-footer">
-                            <a class="btn btn-danger pull-left" href="<?php echo BASE_URL . 'protocolo/excluirprotocolo/' . md5($indice['cod']) ?>"> <i class="fa fa-trash"></i> Excluir</a> 
-                            <button class="btn btn-default" type="button" data-bs-dismiss="modal"><i class="fa fa-times"></i> Fechar</button>
+                            <a class="btn btn-outline-danger pull-left" href="<?php echo BASE_URL . 'legislacao/excluir/' . md5($indice['cod']) ?>"> <i class="fa fa-trash"></i> Excluir</a> 
+                            <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal"><i class="fa fa-times"></i> Fechar</button>
                         </footer>
                     </section>
                 </article>
@@ -248,8 +260,8 @@
                             <h5 class="modal-title text-white">Deseja remover este registro?</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </header>
-                        <article class="modal-body">
-                            <table class="table">
+                        <article class="modal-body p-1">                       
+                            <table class="table align-middle m-0">
                                 <tr>
                                     <td class="bg-light" width="150px">Categoria:</td>
                                     <td><?php echo !empty($indice['categoria']) ? $indice['categoria'] : '' ?></td>
@@ -277,7 +289,7 @@
                                 <tr>
                                     <td class="bg-light">Diário:</td>
                                     <td>
-                                    <?php if (file_exists('../semma/'.$indice['diario'])): ?>
+                                    <?php if (file_exists('../'.$indice['diario'])): ?>
                                         <?php echo!empty($indice['diario']) ? '<a href="' . BASE_URL_SITE . $indice['diario'] . '" target="_blank" class="text-primary btn"><i class="fa fa-download"></i> Visualizar</a>' : ''; ?>
                                         <?php else: ?>
                                         <?php echo!empty($indice['diario']) ? '<a href="' . $indice['diario'] . '" target="_blank" class="text-primary btn"><i class="fa fa-download"></i> Visualizar</a>' : ''; ?>
@@ -287,9 +299,8 @@
                                 <tr>
                                     <td class="bg-light">Anexo:</td>
                                     <td>
-                                        
                                         <?php
-                                        if (file_exists('../semma/'.$indice['anexo'])): ?>
+                                        if (file_exists('../'.$indice['anexo'])): ?>
                                         <?php echo !empty($indice['anexo']) ? '<a href="' .BASE_URL_SITE. $indice['anexo'] . '" target="_blank" class="text-danger btn"><i class="fa fa-download"></i> Visualizar</a>' : ''; ?>
                                         <?php else: ?>
                                         <?php echo !empty($indice['anexo']) ? '<a href="' . $indice['anexo'] . '" target="_blank" class="text-danger btn"><i class="fa fa-download"></i> Visualizar</a>' : ''; ?>
@@ -297,9 +308,9 @@
                                     </td>
                                 </tr>
                             </table>
-                         </article>
+                           </article>
                         <footer class="modal-footer">
-                            <button class="btn btn-default" type="button" data-bs-dismiss="modal"><i class="fa fa-times"></i> Fechar</button>
+                            <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal"><i class="fa fa-times"></i> Fechar</button>
                         </footer>
                     </section>
                 </article>

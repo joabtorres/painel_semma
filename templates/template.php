@@ -32,7 +32,7 @@
         aria-labelledby="offcanvasExampleLabel" style="width: 280px;">
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
             <img src="https://github.com/mdo.png" alt="" width="50" height="50" class="rounded-circle me-2">
-            <span class="fs-5">Joab Torres</span>
+            <span class="fs-5"><?php echo usuario::getInstance()->getNome()?></span>
         </a>
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
@@ -128,7 +128,7 @@
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
                                 <i class="fa-solid fa-user me-1"></i>
-                                <?php echo $viewData['nome'] ?>
+                                <?php echo usuario::getInstance()->getNome();?>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="usuario/editar"><i

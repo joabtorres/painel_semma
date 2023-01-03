@@ -27,6 +27,22 @@ class legislacao
             }
         }
     }
+    public function editar()
+    {
+        $arrayCad = $this->validarForm();
+        if (isset($arrayCad['error']) && !empty($arrayCad['error'])) {
+            return $arrayCad['error'];
+        } else {
+            $arrayCad['cod'] = filter_input(INPUT_POST, 'nCod', FILTER_SANITIZE_SPECIAL_CHARS);
+            $crudModel = crudModel::getInstance();
+            $cadHistorico = $crudModel->update("UPDATE legislacoes SET categoria=:categoria, esfera=:esfera, numero=:numero, ano=:ano, data=:data, ementa=:ementa, diario=:diario, anexo=:anexo WHERE cod=:cod", $arrayCad);
+            if ($cadHistorico) {
+                $_SESSION['historico_acao'] = true;
+                $url = BASE_URL . "legislacao/editar/" . md5($arrayCad['cod']);
+                header("Location: " . $url);
+            }
+        }
+    }
 
     private function validarForm()
     {
@@ -58,8 +74,8 @@ class legislacao
                 $url_arquivo = "uploads/legislacao/$nome";
                 move_uploaded_file($arquivo['tmp_name'], '../' . $url_arquivo);
                 if (!empty($url_file)) {
-                    if (file_exists($url_file)) {
-                        unlink($url_file); //arquivo removido 
+                    if (file_exists('../' . $url_file)) {
+                        unlink('../' . $url_file); //arquivo removido 
                     }
                 }
                 return $url_arquivo;
@@ -75,6 +91,22 @@ class legislacao
         } else {
             return $url_file;
         }
+    }
+    public function excluir($id)
+    {
+        $crudModel = crudModel::getInstance();
+        $resultado = $crudModel->read_specific("SELECT * FROM legislacoes WHERE md5(cod)=:cod", array('cod' => $id));
+        if (isset($resultado) && !empty($resultado) && is_array($resultado)) {
+            if (file_exists('../' . $resultado['diario'])) {
+                unlink('../' . $resultado['diario']);
+            }
+            if (file_exists('../' . $resultado['anexo'])) {
+                unlink('../' . $resultado['anexo']);
+            }
+            $crudModel->remove("DELETE FROM legislacoes WHERE cod=:cod", array('cod' => $resultado['cod']));
+        }
+        $url = BASE_URL . "legislacao/1";
+        header("Location: " . $url);
     }
     public function consultarForm($page)
     {
@@ -116,7 +148,7 @@ class legislacao
         $pagina_atual = (isset($page) && !empty($page)) ? addslashes($page) : 1;
         $indice = ($pagina_atual - 1) * $limite;
         $resultado = array(
-            'total_registro'=> count($total_registro),
+            'total_registro' => count($total_registro),
             'paginas' => $paginas,
             'pagina_atual' => $pagina_atual,
             'parametros' => "nCategoria=$categoria&nEsfera=$esfera&nSelectBuscar=$filtro&nCampo=$campo&nBuscarBT=BuscarBT"
@@ -139,7 +171,7 @@ class legislacao
         $pagina_atual = (isset($page) && !empty($page)) ? addslashes($page) : 1;
         $indice = ($pagina_atual - 1) * $limite;
         $resultado = array(
-            'total_registro'=> count($total_registro),
+            'total_registro' => count($total_registro),
             'paginas' => $paginas,
             'pagina_atual' => $pagina_atual,
             'parametros' => null

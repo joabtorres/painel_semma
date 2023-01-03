@@ -5,7 +5,7 @@ router::get('', function ($arg) {
     if ($user->checkUser()) {
         $view = template::getInstance();
         $crud = crudModel::getInstance();
-        $dados = array('nome' => $user->getNome());
+        $dados = array();
         $dados['legislacoes'] = $crud->read_specific('SELECT COUNT(cod) AS qtd FROM legislacoes');
         $dados['formularios'] = $crud->read_specific('SELECT COUNT(cod) AS qtd FROM formularios');
         $dados['licencas'] = $crud->read_specific('SELECT COUNT(cod) AS qtd FROM licencas_emitidas');

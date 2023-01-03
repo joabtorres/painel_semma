@@ -1,7 +1,7 @@
 <div class="container-fluid mt-3">
     <div class="row">
         <div class="col">
-            <h4 class="mb-1 ms-2">Cadastrar legislação</h4>
+            <h4 class="mb-1 ms-2">Editar legislação</h4>
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb p-2 rounded">
                     <li class="breadcrumb-item" aria-current="page"><a href="<?php echo BASE_URL ?>"> <i
@@ -9,8 +9,8 @@
                     <li class="breadcrumb-item" aria-current="page"><a href="<?php echo BASE_URL ?>legislacao"> <i
                                 class="fa-solid fa-landmark me-1"></i>
                             Legislações</a></li>
-                    <li class="breadcrumb-item " aria-current="page "><i class="fa-regular fa-square-plus me-1"></i>
-                        Cadastrar </li>
+                    <li class="breadcrumb-item " aria-current="page "><i class="fa fa-pencil-alt me-1"></i>
+                        Editar </li>
                 </ol>
             </nav>
         </div>
@@ -25,7 +25,7 @@
         </div>
         <?php } ?>
         <form method="POST" name="nFormLegislacao" enctype="multipart/form-data">
-            <input type="hidden" id="iCod" value="<?php echo (!empty($arrayCad['cod'])) ? $arrayCad['cod'] : ''; ?>">
+            <input type="hidden" id="iCod" name="nCod" value="<?php echo (!empty($arrayCad['cod'])) ? $arrayCad['cod'] : ''; ?>">
             <div class="col">
                 <div class="card">
                     <div class="card-header">
@@ -41,7 +41,7 @@
                                     <?php if (isset($categoria) && !empty($categoria)) {
                                         foreach ($categoria as $index) {
                                             if (isset($arrayCad['categoria']) && $arrayCad['categoria'] == $index['categoria']) {
-                                                echo '<option selected disabled value="' . $index['categoria'] . '">' . $index['categoria'] . '</option>';
+                                                echo '<option selected value="' . $index['categoria'] . '">' . $index['categoria'] . '</option>';
                                             } else {
                                                 echo '<option value="' . $index['categoria'] . '">' . $index['categoria'] . '</option>';
                                             }
@@ -60,7 +60,7 @@
                                     <?php if (isset($esfera) && !empty($esfera)) {
                                         foreach ($esfera as $index) {
                                             if (isset($arrayCad['esfera']) && $arrayCad['esfera'] == $index['esfera']) {
-                                                echo '<option selected disabled value="' . $index['esfera'] . '">' . $index['esfera'] . '</option>';
+                                                echo '<option selected value="' . $index['esfera'] . '">' . $index['esfera'] . '</option>';
                                             } else {
                                                 echo '<option value="' . $index['esfera'] . '">' . $index['esfera'] . '</option>';
                                             }

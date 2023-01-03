@@ -3,7 +3,7 @@ router::get('legislacao/cadastrar', function ($arg) {
     $user = usuario::getInstance();
     if ($user->checkUser()) {
         $template = template::getInstance();
-        $dados = array('nome' => $user->getNome());
+        $dados = array();
         $crud = crudModel::getInstance();
         $dados['categoria'] = $crud->read("SELECT DISTINCT(categoria) as categoria FROM legislacoes");
         $dados['esfera'] = $crud->read("SELECT DISTINCT(esfera) as esfera FROM legislacoes");
@@ -21,7 +21,7 @@ router::post('legislacao/cadastrar', function ($arg) {
     $user = usuario::getInstance();
     if ($user->checkUser()) {
         $template = template::getInstance();
-        $dados = array('nome' => $user->getNome());
+        $dados = array();
         $crud = crudModel::getInstance();
         $dados['categoria'] = $crud->read("SELECT DISTINCT(categoria) as categoria FROM legislacoes");
         $dados['esfera'] = $crud->read("SELECT DISTINCT(esfera) as esfera FROM legislacoes");
@@ -33,11 +33,52 @@ router::post('legislacao/cadastrar', function ($arg) {
     }
 });
 
+router::get('legislacao/editar/{id}', function ($arg) {
+    $user = usuario::getInstance();
+    if ($user->checkUser()) {
+        $template = template::getInstance();
+        $dados = array();
+        $crud = crudModel::getInstance();
+        $dados['arrayCad'] = $crud->read_specific('SELECT * FROM legislacoes WHERE md5(cod)=:cod', array('cod' => $arg['id']));
+        $dados['categoria'] = $crud->read("SELECT DISTINCT(categoria) as categoria FROM legislacoes");
+        $dados['esfera'] = $crud->read("SELECT DISTINCT(esfera) as esfera FROM legislacoes");
 
+        if (isset($_SESSION['historico_acao']) && !empty($_SESSION['historico_acao'])) {
+            $_SESSION['historico_acao'] = false;
+            $dados['error'] = array('class' => 'bg-success', 'msg' => "Alteração realizada com sucesso.");
+        }
+
+        $template->loadTemplate('legislacoes/editar', $dados);
+    }
+});
+
+router::post('legislacao/editar/{id}', function ($arg) {
+    $user = usuario::getInstance();
+    if ($user->checkUser()) {
+        $template = template::getInstance();
+        $dados = array();
+        $crud = crudModel::getInstance();
+        $dados['categoria'] = $crud->read("SELECT DISTINCT(categoria) as categoria FROM legislacoes");
+        $dados['esfera'] = $crud->read("SELECT DISTINCT(esfera) as esfera FROM legislacoes");
+        if (isset($_POST['nSalvar'])) {
+            $legislcao = legislacao::getInstance();
+            $dados['error'] = $legislcao->editar();
+        }
+        $template->loadTemplate('legislacoes/editar', $dados);
+    }
+});
 
 router::get('legislacao', function ($arg) {
     $url = BASE_URL . 'legislacao/1';
     header("Location: $url");
+});
+
+router::get('legislacao/excluir/{id}', function ($arg) {
+    $user = usuario::getInstance();
+    if ($user->checkUser()) {
+        $legislacao = legislacao::getInstance();
+        $legislacao->excluir($arg['id']);
+    }
 });
 
 router::get('legislacao/{page}', function ($arg) {
@@ -45,7 +86,7 @@ router::get('legislacao/{page}', function ($arg) {
     if ($user->checkUser()) {
         // echo $arg['page'];
         $template = template::getInstance();
-        $dados = array('nome' => $user->getNome());
+        $dados = array();
         $crud = crudModel::getInstance();
         $dados['categoria'] = $crud->read("SELECT DISTINCT(categoria) as categoria FROM legislacoes");
         $dados['esfera'] = $crud->read("SELECT DISTINCT(esfera) as esfera FROM legislacoes");
