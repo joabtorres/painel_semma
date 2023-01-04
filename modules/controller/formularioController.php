@@ -1,21 +1,18 @@
 <?php
 
-class formulario
+class formularioController
 {
 
-    private function __construct()
-    {
+    private function __construct()    {
     }
-    public static function getInstance()
-    {
+    public static function getInstance()    {
         static $inst = null;
         if ($inst === null) {
-            $inst = new formulario();
+            $inst = new formularioController();
         }
         return $inst;
     }
-    public function getCoordenacoes()
-    {
+    public function getCoordenacoes()    {
         $coordenacao = array(
             array(
                 'nome' => 'Assessoria Técnica e de Estudos legislativos',
@@ -80,8 +77,7 @@ class formulario
             }
         }
     }
-    private function validarForm()
-    {
+    private function validarForm()    {
         $arrayCad = array(
             'coordenacao' => filter_input(INPUT_POST, 'nCoordenacao', FILTER_SANITIZE_SPECIAL_CHARS),
             'tipo' => filter_input(INPUT_POST, 'nTipo', FILTER_SANITIZE_SPECIAL_CHARS),
@@ -95,8 +91,7 @@ class formulario
 
         return $arrayCad;
     }
-    private function salvarArquivo($arquivo, $url_file, $coordenacao)
-    {
+    private function salvarArquivo($arquivo, $url_file, $coordenacao)    {
         if (!empty($arquivo['tmp_name'])) {
             if ($arquivo['type'] == 'application/pdf' || $arquivo['type'] == 'application/msword' || $arquivo['type'] == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
                 switch ($arquivo['type']) {
@@ -132,8 +127,7 @@ class formulario
         }
     }
 
-    public function excluir($id)
-    {
+    public function excluir($id)    {
         $crudModel = crudModel::getInstance();
         $resultado = $crudModel->read_specific("SELECT * FROM formularios WHERE md5(cod)=:cod", array('cod' => $id));
         if (isset($resultado) && !empty($resultado) && is_array($resultado)) {
@@ -145,8 +139,7 @@ class formulario
         $url = BASE_URL . "formulario/1";
         header("Location: " . $url);
     }
-    public function consultarForm($page)
-    {
+    public function consultarForm($page)    {
         $coordenacao = filter_input(INPUT_GET, 'nCoordenacao', FILTER_SANITIZE_SPECIAL_CHARS);
         $tipo = filter_input(INPUT_GET, 'nTipo', FILTER_SANITIZE_SPECIAL_CHARS);
         $filtro = filter_input(INPUT_GET, 'nSelectBuscar', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -191,8 +184,7 @@ class formulario
         $resultado['formularios'] = $crudModel->read($sql, $arrayForm);
         return $resultado;
     }
-    public function consultar($page)
-    {
+    public function consultar($page)    {
         $crudModel = crudModel::getInstance();
         $arrayForm = array();
         $sql = "SELECT * FROM formularios WHERE cod>0 ";

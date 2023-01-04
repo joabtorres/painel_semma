@@ -1,5 +1,5 @@
 <?php
-class usuario
+class usuarioController
 {
     private function __construct()
     {
@@ -8,7 +8,7 @@ class usuario
     {
         static $inst = null;
         if ($inst === null) {
-            $inst = new usuario();
+            $inst = new usuarioController();
         }
         return $inst;
     }

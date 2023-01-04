@@ -1,7 +1,7 @@
 <?php
 
 router::get('formulario/cadastrar', function ($arg) {
-    $user = usuario::getInstance();
+    $user = usuarioController::getInstance();
     if ($user->checkUser()) {
         $template = template::getInstance();
         $dados = array();
@@ -14,19 +14,19 @@ router::get('formulario/cadastrar', function ($arg) {
 });
 
 router::post('formulario/cadastrar', function ($arg) {
-    $user = usuario::getInstance();
+    $user = usuarioController::getInstance();
     if ($user->checkUser()) {
         $template = template::getInstance();
         $dados = array();
         if (isset($_POST['nSalvar'])) {
-            $formulario = formulario::getInstance();
+            $formulario = formularioController::getInstance();
             $dados['error'] = $formulario->cadastrar();
         }
         $template->loadTemplate('formulario/cadastrar', $dados);
     }
 });
 router::get('formulario/editar/{id}', function ($arg) {
-    $user = usuario::getInstance();
+    $user = usuarioController::getInstance();
     if ($user->checkUser()) {
         $template = template::getInstance();
         $dados = array();
@@ -42,12 +42,12 @@ router::get('formulario/editar/{id}', function ($arg) {
 });
 
 router::post('formulario/editar/{id}', function ($arg) {
-    $user = usuario::getInstance();
+    $user = usuarioController::getInstance();
     if ($user->checkUser()) {
         $template = template::getInstance();
         $dados = array();
         if (isset($_POST['nSalvar'])) {
-            $formulario = formulario::getInstance();
+            $formulario = formularioController::getInstance();
             $dados['error'] = $formulario->editar();
         }
         $template->loadTemplate('formulario/editar', $dados);
@@ -55,9 +55,9 @@ router::post('formulario/editar/{id}', function ($arg) {
 });
 
 router::get('formulario/excluir/{id}', function ($arg) {
-    $user = usuario::getInstance();
+    $user = usuarioController::getInstance();
     if ($user->checkUser()) {
-        $formulario = formulario::getInstance();
+        $formulario = formularioController::getInstance();
         $formulario->excluir($arg['id']);
     }
 });
@@ -66,14 +66,14 @@ router::get('formulario', function ($arg) {
     header("location: $url");
 });
 router::get('formulario/{page}', function ($arg) {
-    $user = usuario::getInstance();
+    $user = usuarioController::getInstance();
     if ($user->checkUser()) {
         // echo $arg['page'];
         $template = template::getInstance();
         $dados = array();
         $crud = crudModel::getInstance();
         $dados['tipo'] = $crud->read("SELECT DISTINCT(tipo) as tipo FROM formularios");
-        $formulario = formulario::getInstance();
+        $formulario = formularioController::getInstance();
         if (filter_input(INPUT_GET, 'nBuscarBT')) {
             $resultado = $formulario->consultarForm($arg['page']);
             $dados['total_registro'] = $resultado['total_registro'];
@@ -82,7 +82,7 @@ router::get('formulario/{page}', function ($arg) {
             $dados['parametros'] = $resultado['parametros'];
             $dados['formularios'] = $resultado['formularios'];
         } else {
-            $formulario = formulario::getInstance();
+            $formulario = formularioController::getInstance();
             $resultado = $formulario->consultar($arg['page']);
             $dados['total_registro'] = $resultado['total_registro'];
             $dados['paginas'] = $resultado['paginas'];

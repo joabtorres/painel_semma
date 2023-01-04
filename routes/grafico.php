@@ -1,7 +1,7 @@
 <?php
 
 router::get('grafico/visitantes', function ($arg) {
-    $user = usuario::getInstance();
+    $user = usuarioController::getInstance();
     if ($user->checkUser()) {
         $crud = crudModel::getInstance();
         $resultado = $crud->read("SELECT mes as label, vizualizacoes as data FROM visitantes WHERE ano=:ano", array('ano' => date('Y')));
@@ -9,7 +9,7 @@ router::get('grafico/visitantes', function ($arg) {
     }
 });
 router::get('grafico/licencas_emitidas', function ($arg) {
-    $user = usuario::getInstance();
+    $user = usuarioController::getInstance();
     if ($user->checkUser()) {
         $crud = crudModel::getInstance();
         $resultado = $crud->read("SELECT ano as label, COUNT(ano) as data FROM licencas_emitidas GROUP BY ano;");

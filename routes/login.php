@@ -1,6 +1,6 @@
 <?php
 router::get('sair', function ($ags) {
-    usuario::getInstance()->sair();
+    usuarioController::getInstance()->sair();
 });
 
 router::get('login', function ($ags) {
@@ -14,7 +14,7 @@ router::post('login', function ($ags) {
     $dados = array();
 
     if (isset($_POST['nLogar'])) {
-        $user = usuario::getInstance();
+        $user = usuarioController::getInstance();
         $dados['error'] = $user->logar();
     }
 

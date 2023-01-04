@@ -1,6 +1,6 @@
 <?php
 router::get('legislacao/cadastrar', function ($arg) {
-    $user = usuario::getInstance();
+    $user = usuarioController::getInstance();
     if ($user->checkUser()) {
         $template = template::getInstance();
         $dados = array();
@@ -18,7 +18,7 @@ router::get('legislacao/cadastrar', function ($arg) {
 });
 
 router::post('legislacao/cadastrar', function ($arg) {
-    $user = usuario::getInstance();
+    $user = usuarioController::getInstance();
     if ($user->checkUser()) {
         $template = template::getInstance();
         $dados = array();
@@ -26,7 +26,7 @@ router::post('legislacao/cadastrar', function ($arg) {
         $dados['categoria'] = $crud->read("SELECT DISTINCT(categoria) as categoria FROM legislacoes");
         $dados['esfera'] = $crud->read("SELECT DISTINCT(esfera) as esfera FROM legislacoes");
         if (isset($_POST['nSalvar'])) {
-            $legislcao = legislacao::getInstance();
+            $legislcao = legislacaoController::getInstance();
             $dados['error'] = $legislcao->cadastrar();
         }
         $template->loadTemplate('legislacoes/cadastrar', $dados);
@@ -34,7 +34,7 @@ router::post('legislacao/cadastrar', function ($arg) {
 });
 
 router::get('legislacao/editar/{id}', function ($arg) {
-    $user = usuario::getInstance();
+    $user = usuarioController::getInstance();
     if ($user->checkUser()) {
         $template = template::getInstance();
         $dados = array();
@@ -53,7 +53,7 @@ router::get('legislacao/editar/{id}', function ($arg) {
 });
 
 router::post('legislacao/editar/{id}', function ($arg) {
-    $user = usuario::getInstance();
+    $user = usuarioController::getInstance();
     if ($user->checkUser()) {
         $template = template::getInstance();
         $dados = array();
@@ -61,7 +61,7 @@ router::post('legislacao/editar/{id}', function ($arg) {
         $dados['categoria'] = $crud->read("SELECT DISTINCT(categoria) as categoria FROM legislacoes");
         $dados['esfera'] = $crud->read("SELECT DISTINCT(esfera) as esfera FROM legislacoes");
         if (isset($_POST['nSalvar'])) {
-            $legislcao = legislacao::getInstance();
+            $legislcao = legislacaoController::getInstance();
             $dados['error'] = $legislcao->editar();
         }
         $template->loadTemplate('legislacoes/editar', $dados);
@@ -69,9 +69,9 @@ router::post('legislacao/editar/{id}', function ($arg) {
 });
 
 router::get('legislacao/excluir/{id}', function ($arg) {
-    $user = usuario::getInstance();
+    $user = usuarioController::getInstance();
     if ($user->checkUser()) {
-        $legislacao = legislacao::getInstance();
+        $legislacao = legislacaoController::getInstance();
         $legislacao->excluir($arg['id']);
     }
 });
@@ -82,7 +82,7 @@ router::get('legislacao', function ($arg) {
 });
 
 router::get('legislacao/{page}', function ($arg) {
-    $user = usuario::getInstance();
+    $user = usuarioController::getInstance();
     if ($user->checkUser()) {
         // echo $arg['page'];
         $template = template::getInstance();
@@ -90,7 +90,7 @@ router::get('legislacao/{page}', function ($arg) {
         $crud = crudModel::getInstance();
         $dados['categoria'] = $crud->read("SELECT DISTINCT(categoria) as categoria FROM legislacoes");
         $dados['esfera'] = $crud->read("SELECT DISTINCT(esfera) as esfera FROM legislacoes");
-        $legislacao = legislacao::getInstance();
+        $legislacao = legislacaoController::getInstance();
         if(filter_input(INPUT_GET, 'nBuscarBT')){
             $resultado = $legislacao->consultarForm($arg['page']);
             $dados['total_registro'] = $resultado['total_registro'];
@@ -99,7 +99,7 @@ router::get('legislacao/{page}', function ($arg) {
             $dados['parametros'] = $resultado['parametros'];
             $dados['legislacoes'] = $resultado['legislacoes'];
         }else{
-            $legislacao = legislacao::getInstance();
+            $legislacao = legislacaoController::getInstance();
             $resultado = $legislacao->consultar($arg['page']);
             $dados['total_registro'] = $resultado['total_registro'];
             $dados['paginas'] = $resultado['paginas'];

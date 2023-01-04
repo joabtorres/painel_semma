@@ -1,7 +1,7 @@
 <?php
 
 router::get('', function ($arg) {
-    $user = usuario::getInstance();
+    $user = usuarioController::getInstance();
     if ($user->checkUser()) {
         $view = template::getInstance();
         $crud = crudModel::getInstance();
@@ -19,3 +19,4 @@ router::getInstance()->loadRouteFile('login');
 router::getInstance()->loadRouteFile('grafico');
 router::getInstance()->loadRouteFile('legislacao');
 router::getInstance()->loadRouteFile('formulario');
+router::getInstance()->loadRouteFile('licencas');

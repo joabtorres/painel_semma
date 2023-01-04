@@ -41,7 +41,7 @@
                                         <select class="form-select" id="iCoordenacao" name="nCoordenacao" required>
                                             <option selected disabled value="">Selecione...</option>
                                             <?php
-                                            $coordenacao = formulario::getInstance()->getCoordenacoes();
+                                            $coordenacao = formularioController::getInstance()->getCoordenacoes();
                                             foreach ($coordenacao as $index) {
                                                 if (isset($arrayCad['coordenacao']) && $arrayCad['coordenacao'] == $index['sigla']) {
                                                     echo '<option selected value="' . $index['sigla'] . '">' . $index['nome'] . '</option>';

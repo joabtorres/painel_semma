@@ -12,4 +12,4 @@ spl_autoload_register(function ($class) {
     }
 });
 
-Core::getInstance()->run($config);
+core::getInstance()->run($config);

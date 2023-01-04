@@ -34,7 +34,7 @@
                                         <option selected disabled value="">Selecione...</option>
                                         <option value="">Todos</option>
                                         <?php
-                                            $coordenacao = formulario::getInstance()->getCoordenacoes();
+                                            $coordenacao = formularioController::getInstance()->getCoordenacoes();
                                             foreach ($coordenacao as $index) {
                                                 echo '<option value="' . $index['sigla'] . '">' . $index['nome'] . '</option>';
                                             }

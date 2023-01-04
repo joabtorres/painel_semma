@@ -32,7 +32,7 @@
         aria-labelledby="offcanvasExampleLabel" style="width: 280px;">
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
             <img src="https://github.com/mdo.png" alt="" width="50" height="50" class="rounded-circle me-2">
-            <span class="fs-5"><?php echo usuario::getInstance()->getNome()?></span>
+            <span class="fs-5"><?php echo usuarioController::getInstance()->getNome()?></span>
         </a>
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
@@ -71,7 +71,7 @@
                     Licenças Emitidas
                 </a>
                 <ul class="collapse" id="colapseLicenca">
-                    <li> <a href="#"><i class="fa-regular fa-square-plus me-1 ms-3"></i> Cadastrar</a></li>
+                    <li> <a href="<?php echo BASE_URL?>licenca/cadastrar"><i class="fa-regular fa-square-plus me-1 ms-3"></i> Cadastrar</a></li>
                     <li> <a href="#"><i class="fa-solid fa-magnifying-glass me-1 ms-3"></i>Consultar</a></li>
                 </ul>
             </li>
@@ -128,7 +128,7 @@
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
                                 <i class="fa-solid fa-user me-1"></i>
-                                <?php echo usuario::getInstance()->getNome();?>
+                                <?php echo usuarioController::getInstance()->getNome();?>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="usuario/editar"><i

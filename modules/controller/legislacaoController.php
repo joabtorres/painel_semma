@@ -1,5 +1,5 @@
 <?php
-class legislacao
+class legislacaoController
 {
     private function __construct()
     {
@@ -8,7 +8,7 @@ class legislacao
     {
         static $inst = null;
         if ($inst === null) {
-            $inst = new legislacao();
+            $inst = new legislacaoController();
         }
         return $inst;
     }
