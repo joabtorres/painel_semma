@@ -18,3 +18,4 @@ router::get('', function ($arg) {
 router::getInstance()->loadRouteFile('login');
 router::getInstance()->loadRouteFile('grafico');
 router::getInstance()->loadRouteFile('legislacao');
+router::getInstance()->loadRouteFile('formulario');

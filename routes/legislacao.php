@@ -68,17 +68,17 @@ router::post('legislacao/editar/{id}', function ($arg) {
     }
 });
 
-router::get('legislacao', function ($arg) {
-    $url = BASE_URL . 'legislacao/1';
-    header("Location: $url");
-});
-
 router::get('legislacao/excluir/{id}', function ($arg) {
     $user = usuario::getInstance();
     if ($user->checkUser()) {
         $legislacao = legislacao::getInstance();
         $legislacao->excluir($arg['id']);
     }
+});
+
+router::get('legislacao', function ($arg) {
+    $url = BASE_URL . 'legislacao/1';
+    header("Location: $url");
 });
 
 router::get('legislacao/{page}', function ($arg) {

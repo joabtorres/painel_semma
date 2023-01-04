@@ -47,6 +47,21 @@ function validarFormLegislacao() {
     }
 
 }
+function validarFormFormularios() {
+    form = document.nFormFormularios;
+    if (null_or_empty("iCoordenacao")
+        || null_or_empty("iTipo")
+        || null_or_empty("iData")
+        || null_or_empty("iDescricao")
+    ) {
+        $(form).addClass('was-validated');
+    } else {
+        form.submit();
+    }
+
+}
+
+
 function null_or_empty(str) {
     var v = document.getElementById(str).value;
     return v == null || v == "";
