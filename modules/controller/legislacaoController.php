@@ -87,7 +87,6 @@ class legislacaoController
                     )
                 );
             }
-
         } else {
             return $url_file;
         }

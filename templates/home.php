@@ -4,13 +4,11 @@
             <h4 class="mb-1 ms-2">Página Inicial</h4>
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb p-2 rounded">
-                    <li class="breadcrumb-item active" aria-current="page"> <i
-                            class="fa-solid fa-mug-hot me-1"></i>Página Inicial</li>
+                    <li class="breadcrumb-item active" aria-current="page"> <i class="fa-solid fa-mug-hot me-1"></i>Página Inicial</li>
                 </ol>
             </nav>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-3">
             <div class="card">
@@ -36,10 +34,10 @@
                 <div class="card-body">
                     <p class="m-0">
                         <?php if (!empty($formularios)) {
-                        echo $formularios['qtd'] . ' Registros encontrados';
-                    } else {
-                        echo 'Nenhum registro encontrado';
-                    } ?>
+                            echo $formularios['qtd'] . ' Registros encontrados';
+                        } else {
+                            echo 'Nenhum registro encontrado';
+                        } ?>
                     </p>
                 </div>
             </div>
@@ -53,10 +51,10 @@
                 <div class="card-body">
                     <p class="m-0">
                         <?php if (!empty($licencas)) {
-                        echo $licencas['qtd'] . ' Registros encontrados';
-                    } else {
-                        echo 'Nenhum registro encontrado';
-                    } ?>
+                            echo $licencas['qtd'] . ' Registros encontrados';
+                        } else {
+                            echo 'Nenhum registro encontrado';
+                        } ?>
                     </p>
                 </div>
             </div>
@@ -70,10 +68,10 @@
                 <div class="card-body">
                     <p class="m-0">
                         <?php if (!empty($trs)) {
-                        echo $trs['qtd'] . ' Registros encontrados';
-                    } else {
-                        echo 'Nenhum registro encontrado';
-                    } ?>
+                            echo $trs['qtd'] . ' Registros encontrados';
+                        } else {
+                            echo 'Nenhum registro encontrado';
+                        } ?>
                     </p>
                 </div>
             </div>

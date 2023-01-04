@@ -10,7 +10,6 @@ router::get('', function ($arg) {
         $dados['formularios'] = $crud->read_specific('SELECT COUNT(cod) AS qtd FROM formularios');
         $dados['licencas'] = $crud->read_specific('SELECT COUNT(cod) AS qtd FROM licencas_emitidas');
         $dados['trs'] = $crud->read_specific('SELECT COUNT(id) AS qtd FROM termos_de_referencia');
-
         $view->loadTemplate('home', $dados);
     }
 });

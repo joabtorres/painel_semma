@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-router::get('licenca/cadastrar', function($arg){
+router::get('licenca/cadastrar', function ($arg) {
     $user = usuarioController::getInstance();
     if ($user->checkUser()) {
         $template = template::getInstance();

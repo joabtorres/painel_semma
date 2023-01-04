@@ -27,5 +27,4 @@ router::post('login', function ($ags) {
             echo '<script>var myModal = new bootstrap.Modal(document.getElementById("modalEmailError"));myModal.show();</script>';
         }
     }
-
 });

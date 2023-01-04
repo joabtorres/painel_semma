@@ -1,48 +1,52 @@
 <?php
 class licencaController
 {
-    private function __construct()    {
+    private function __construct()
+    {
     }
-    public static function getInstance(){
+    public static function getInstance()
+    {
         static $inst = null;
         if ($inst === null) {
             $inst = new licencaController();
         }
         return $inst;
     }
-    public function getLicencas(){
+    public function getLicencas()
+    {
         $licenca = array(
-                array(
-                    'licenca' => 'AUTORIZAÇÃO DE FUNCIONAMENTO / EVENTO TEMPORÁRIO'
-                ),
-                array(
-                    'licenca' => 'DISPENSA DE LICENCIAMENTO AMBIENTAL '
-                ),
-                array(
-                    'licenca' => 'LICENÇA AMBIENTAL DECLARATÓRIA'
-                ),
-                array(
-                    'licenca' => 'LICENÇA AMBIENTAL RURAL'
-                ),
-                array(
-                    'licenca' => 'LICENÇA AMBIENTAL SIMPLIFICADA '
-                ),
-                array(
-                    'licenca' => 'LICENÇA DE ATIVIDADE RURAL'
-                ),
-                array(
-                    'licenca' => 'LICENÇA DE INSTALAÇÃO'
-                ),
-                array(
-                    'licenca' => 'LICENÇA DE OPERAÇÃO'
-                ),
-                array(
-                    'licenca' => 'LICENÇA PRÉVIA'
-                )
-            );
+            array(
+                'licenca' => 'AUTORIZAÇÃO DE FUNCIONAMENTO / EVENTO TEMPORÁRIO'
+            ),
+            array(
+                'licenca' => 'DISPENSA DE LICENCIAMENTO AMBIENTAL '
+            ),
+            array(
+                'licenca' => 'LICENÇA AMBIENTAL DECLARATÓRIA'
+            ),
+            array(
+                'licenca' => 'LICENÇA AMBIENTAL RURAL'
+            ),
+            array(
+                'licenca' => 'LICENÇA AMBIENTAL SIMPLIFICADA '
+            ),
+            array(
+                'licenca' => 'LICENÇA DE ATIVIDADE RURAL'
+            ),
+            array(
+                'licenca' => 'LICENÇA DE INSTALAÇÃO'
+            ),
+            array(
+                'licenca' => 'LICENÇA DE OPERAÇÃO'
+            ),
+            array(
+                'licenca' => 'LICENÇA PRÉVIA'
+            )
+        );
         return $licenca;
     }
-    public function cadastrar()  {
+    public function cadastrar()
+    {
         $arrayCad = $this->validarForm();
         if (isset($arrayCad['error']) && !empty($arrayCad['error'])) {
             return $arrayCad['error'];

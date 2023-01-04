@@ -25,35 +25,30 @@
                     <p class="text-center text-uppercase mb-3 mt-0"><?php echo NAME_PROJECT ?></p>
                     <form class="g-3 needs-validation" novalidat method="POST" name="nFormLogin">
                         <div class="input-group mb-2">
-                            <span class="input-group-text bg-primary text-white" for="iUsuario"><i
-                                    class="fa fa-user"></i></span>
-                            <input type="email" class="form-control border-primary" placeholder="Usuario" id="iUsuario"
-                                name="nUsuario" required>
+                            <span class="input-group-text bg-primary text-white" for="iUsuario"><i class="fa fa-user"></i></span>
+                            <input type="email" class="form-control border-primary" placeholder="Usuario" id="iUsuario" name="nUsuario" required>
                             <div class="invalid-feedback text-end">
                                 Informe o usuário
                             </div>
                         </div>
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-primary text-white"><i class="fa-solid fa-lock"></i></span>
-                            <input type="password" class="form-control border-primary" placeholder="Senha" name="nSenha"
-                                id="iSenha" required>
+                            <input type="password" class="form-control border-primary" placeholder="Senha" name="nSenha" id="iSenha" required>
                             <div class="invalid-feedback text-end">
                                 Informe a senha
                             </div>
                         </div>
                         <?php if (!empty($error)) { ?>
-                        <div class="alert bg-danger text-white alert-dismissible fade show" role="alert">
-                            <?php echo $error ?>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
+                            <div class="alert bg-danger text-white alert-dismissible fade show" role="alert">
+                                <?php echo $error ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
                         <?php } ?>
                         <div class="mb-2 text-end">
-                            <button type="button" class="btn btn-link small text-decoration-none" data-bs-toggle="modal"
-                                data-bs-target="#modalNovaSenha"> Gerar nova senha</button>
+                            <button type="button" class="btn btn-link small text-decoration-none" data-bs-toggle="modal" data-bs-target="#modalNovaSenha"> Gerar nova senha</button>
                         </div>
                         <div class="d-grid text-start">
-                            <button class="btn btn-primary" name="nLogar" value="Sim" onclick="validarFormLogin()"><i
-                                    class="fa-solid fa-arrow-right-to-bracket"></i> Entrar</button>
+                            <button class="btn btn-primary" name="nLogar" value="Sim" onclick="validarFormLogin()"><i class="fa-solid fa-arrow-right-to-bracket"></i> Entrar</button>
                         </div>
                     </form>
                 </div>
@@ -64,8 +59,7 @@
         <div class="container">
             <div class="row">
                 <div class="col text-center">
-                    <p class="mt-5 mb-3 text-muted">&copy; Copyright 2022 <br /> <a href="http://joabtorres.com.br"
-                            target="_blank" class="text-decoration-none">Joab Torres Alencar</a></p>
+                    <p class="mt-5 mb-3 text-muted">&copy; Copyright 2022 <br /> <a href="http://joabtorres.com.br" target="_blank" class="text-decoration-none">Joab Torres Alencar</a></p>
                 </div>
             </div>
         </div>
@@ -90,17 +84,14 @@
                         <div class="col-md-6">
                             <form method="POST" name="formNewPassword">
                                 <div class="input-group mb-2">
-                                    <span class="input-group-text bg-primary text-white" for="iEmail"><i
-                                            class="fa-solid fa-envelope"></i></span>
-                                    <input type="text" class="form-control border-primary" placeholder="Email"
-                                        id="iEmail" name="nEmail" required>
+                                    <span class="input-group-text bg-primary text-white" for="iEmail"><i class="fa-solid fa-envelope"></i></span>
+                                    <input type="text" class="form-control border-primary" placeholder="Email" id="iEmail" name="nEmail" required>
                                     <div class="invalid-feedback">
                                         Informe o email
                                     </div>
                                 </div>
                                 <div class="mt-2 text-end">
-                                    <button class="btn btn-primary" name="nNovaSenha" value="Sim"
-                                        onclick="validarFormNewPassword()"><i class="fa-solid fa-check"></i> Gerar nova
+                                    <button class="btn btn-primary" name="nNovaSenha" value="Sim" onclick="validarFormNewPassword()"><i class="fa-solid fa-check"></i> Gerar nova
                                         senha </button>
                                 </div>
                             </form>
@@ -125,8 +116,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="modalEmailSuccess" tabindex="-1" aria-labelledby="emodalEmailSuccess"
-        aria-hidden="true">
+    <div class="modal fade" id="modalEmailSuccess" tabindex="-1" aria-labelledby="emodalEmailSuccess" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-success text-white">

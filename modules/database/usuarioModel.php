@@ -42,7 +42,6 @@ class usuarioModel extends database
             } else {
                 return false;
             }
-
         } catch (PDOException $ex) {
             die($ex->getMessage());
         }
