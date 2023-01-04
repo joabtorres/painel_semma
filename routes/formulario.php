@@ -2,7 +2,7 @@
 
 router::get('formulario/cadastrar', function ($arg) {
     $user = usuario::getInstance();
-    if ($user->checkUser()){
+    if ($user->checkUser()) {
         $template = template::getInstance();
         $dados = array();
         if (isset($_SESSION['historico_acao']) && !empty($_SESSION['historico_acao'])) {
@@ -15,7 +15,7 @@ router::get('formulario/cadastrar', function ($arg) {
 
 router::post('formulario/cadastrar', function ($arg) {
     $user = usuario::getInstance();
-    if ($user->checkUser()){
+    if ($user->checkUser()) {
         $template = template::getInstance();
         $dados = array();
         if (isset($_POST['nSalvar'])) {
@@ -74,14 +74,14 @@ router::get('formulario/{page}', function ($arg) {
         $crud = crudModel::getInstance();
         $dados['tipo'] = $crud->read("SELECT DISTINCT(tipo) as tipo FROM formularios");
         $formulario = formulario::getInstance();
-        if(filter_input(INPUT_GET, 'nBuscarBT')){
+        if (filter_input(INPUT_GET, 'nBuscarBT')) {
             $resultado = $formulario->consultarForm($arg['page']);
             $dados['total_registro'] = $resultado['total_registro'];
             $dados['paginas'] = $resultado['paginas'];
             $dados['pagina_atual'] = $resultado['pagina_atual'];
             $dados['parametros'] = $resultado['parametros'];
             $dados['formularios'] = $resultado['formularios'];
-        }else{
+        } else {
             $formulario = formulario::getInstance();
             $resultado = $formulario->consultar($arg['page']);
             $dados['total_registro'] = $resultado['total_registro'];
@@ -90,7 +90,7 @@ router::get('formulario/{page}', function ($arg) {
             $dados['parametros'] = $resultado['parametros'];
             $dados['formularios'] = $resultado['formularios'];
         }
-        
+
         $template->loadTemplate('formulario/consultar', $dados);
     }
 });

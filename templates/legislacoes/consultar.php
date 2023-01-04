@@ -257,7 +257,8 @@
                 <article class="modal-dialog modal-lg modal-dialog-centered" role="document">
                     <section class="modal-content">
                         <header class="modal-header bg-primary">
-                            <h5 class="modal-title text-white">Deseja remover este registro?</h5>
+                            <h5 class="modal-title text-white"><i class="fa-solid fa-landmark me-1"></i>
+                        Legislações</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </header>
                         <article class="modal-body p-1">                       

@@ -14,7 +14,8 @@ class formulario
         }
         return $inst;
     }
-    public function getCoordenacoes(){
+    public function getCoordenacoes()
+    {
         $coordenacao = array(
             array(
                 'nome' => 'Assessoria Técnica e de Estudos legislativos',
