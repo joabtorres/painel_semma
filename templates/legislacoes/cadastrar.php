@@ -39,7 +39,7 @@
                                     <?php if (isset($categoria) && !empty($categoria)) {
                                         foreach ($categoria as $index) {
                                             if (isset($arrayCad['categoria']) && $arrayCad['categoria'] == $index['categoria']) {
-                                                echo '<option selected disabled value="' . $index['categoria'] . '">' . $index['categoria'] . '</option>';
+                                                echo '<option selected value="' . $index['categoria'] . '">' . $index['categoria'] . '</option>';
                                             } else {
                                                 echo '<option value="' . $index['categoria'] . '">' . $index['categoria'] . '</option>';
                                             }
@@ -57,7 +57,7 @@
                                     <?php if (isset($esfera) && !empty($esfera)) {
                                         foreach ($esfera as $index) {
                                             if (isset($arrayCad['esfera']) && $arrayCad['esfera'] == $index['esfera']) {
-                                                echo '<option selected disabled value="' . $index['esfera'] . '">' . $index['esfera'] . '</option>';
+                                                echo '<option selected value="' . $index['esfera'] . '">' . $index['esfera'] . '</option>';
                                             } else {
                                                 echo '<option value="' . $index['esfera'] . '">' . $index['esfera'] . '</option>';
                                             }

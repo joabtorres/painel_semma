@@ -1,12 +1,13 @@
 <div class="container-fluid mt-3">
     <div class="row">
         <div class="col">
-            <h4 class="mb-1 ms-2">Cadastrar licenças emitidas</h4>
+            <h4 class="mb-1 ms-2">Editar licenças emitidas</h4>
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb p-2 rounded">
                     <li class="breadcrumb-item" aria-current="page"><a href="<?php echo BASE_URL ?>"><i class="fa-solid fa-mug-hot me-1"></i>Página Inicial</a></li>
                     <li class="breadcrumb-item" aria-current="page"><a href="<?php echo BASE_URL ?>licenca"> <i class="fa-solid fa-file-circle-check  me-1"></i>Licenças Emitidas</a></li>
-                    <li class="breadcrumb-item " aria-current="page "><i class="fa-regular fa-square-plus me-1"></i>Cadastrar </li>
+                    <li class="breadcrumb-item " aria-current="page "><i class="fa fa-pencil-alt me-1"></i>
+                        Editar </li>
                 </ol>
             </nav>
         </div>
@@ -38,7 +39,7 @@
                                     $licenca = licencaController::getInstance()->getLicencas();
                                     foreach ($licenca as $index) {
                                         if (isset($arrayCad['licenca']) && $arrayCad['licenca'] == $index['licenca']) {
-                                            echo '<option selected disabled value="' . $index['licenca'] . '">' . $index['licenca'] . '</option>';
+                                            echo '<option selected value="' . $index['licenca'] . '">' . $index['licenca'] . '</option>';
                                         } else {
                                             echo '<option value="' . $index['licenca'] . '">' . $index['licenca'] . '</option>';
                                         }
