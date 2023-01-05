@@ -46,7 +46,7 @@
                                     ?>
                                 </select>
                                 <div class="invalid-feedback">
-                                    Selecione a categoria
+                                    Selecione a licença
                                 </div>
                             </div>
                         </div>
@@ -67,9 +67,9 @@
                             </div>
                             <div class="col-md-2 mt-2">
                                 <label for="iNumeroProtocolo" class="form-label">Número do protocolo:</label>
-                                <input type="text" class="form-control" id="iNumeroProtocolo" name="nNumeroProtocolo" placeholder="Exemplo: 041" required value="<?php echo (!empty($arrayCad['n_protocolo'])) ? $arrayCad['n_licenca'] : ''; ?>">
+                                <input type="text" class="form-control" id="iNumeroProtocolo" name="nNumeroProtocolo" placeholder="Exemplo: 00041/2022" required value="<?php echo (!empty($arrayCad['n_protocolo'])) ? $arrayCad['n_protocolo'] : ''; ?>">
                                 <div class="invalid-feedback">
-                                    Informe o número do Protocolo
+                                    Informe o número do protocolo
                                 </div>
                             </div>
                             <div class="col-md-3 mt-2">
@@ -78,30 +78,30 @@
                             </div>
                             <div class="col-md-3 mt-2">
                                 <label for="iDataValidade" class="form-label">Data de validade:</label>
-                                <input type="text" class="form-control date_serach input-data" id="iDataValidade" name="nDataValidade" placeholder="Exmplo: 02/10/2015" value="<?php echo (!empty($arrayCad['data_validade'])) ? $arrayCad['data_validade'] : ''; ?>">
+                                <input type="text" class="form-control" id="iDataValidade" name="nDataValidade" placeholder="Exmplo: 02/10/2015" value="<?php echo (!empty($arrayCad['data_validade'])) ? $arrayCad['data_validade'] : ''; ?>">
                             </div>
                             <div class="col-md-12 mt-2">
                                 <label for="iEmpreendimento" class="form-label">Empreendimento:</label>
-                                <input type="text" class="form-control" id="iEmpreendimento" name="nEmpreendimento" placeholder="Exemplo: PREFEITURA MUNICIPAL DE CASTANHAL" required value="<?php echo (!empty($arrayCad['n_protocolo'])) ? $arrayCad['n_licenca'] : ''; ?>">
+                                <input type="text" class="form-control" id="iEmpreendimento" name="nEmpreendimento" placeholder="Exemplo: PREFEITURA MUNICIPAL DE CASTANHAL" required value="<?php echo (!empty($arrayCad['empreendimento'])) ? $arrayCad['empreendimento'] : ''; ?>">
                                 <div class="invalid-feedback">
-                                    Informe o número do Protocolo
+                                    Informe o empreendimento
                                 </div>
                             </div>
                             <div class="col-md-12 mt-2">
                                 <label for="iTipologia" class="form-label">Tipologia:</label>
                                 <input type="text" class="form-control" id="iTipologia" name="nTipologia" placeholder="Exemplo: CONSTRUÇÃO DE HABITAÇÃO URBANA" value="<?php echo (!empty($arrayCad['tipologia'])) ? $arrayCad['tipologia'] : ''; ?>">
                                 <div class="invalid-feedback">
-                                    Informe o número do Protocolo
+                                    Informe a tipologia
                                 </div>
                             </div>
                             <div class="col-md-12  mt-2">
-                                <label for="validationServer03" class="form-label">Observação:</label>
-                                <textarea name="nEmenta" id="iEmenta" rows="2" class="form-control"><?php echo (!empty($arrayCad['observacao'])) ? $arrayCad['observacao'] : ''; ?></textarea>
+                                <label for="iDescricao" class="form-label">Observação:</label>
+                                <textarea name="nDescricao" id="iDescricao" rows="2" class="form-control"><?php echo (!empty($arrayCad['observacao'])) ? $arrayCad['observacao'] : ''; ?></textarea>
                             </div>
                         </div>
 
                         <div class="mt-3">
-                            <button class="btn btn-outline-success me-2" name="nSalvar" value="Salvar" onclick="validarFormLegislacao()"><i class="fa-solid fa-check"></i> Salvar</button>
+                            <button class="btn btn-outline-success me-2" name="nSalvar" value="Salvar" onclick="validarFormLicenca()"><i class="fa-solid fa-check"></i> Salvar</button>
                             <a class="btn btn-outline-danger" href="<?php echo BASE_URL ?>"> <i class="fa-solid fa-xmark"></i> Cancelar</a>
                         </div>
                     </div>

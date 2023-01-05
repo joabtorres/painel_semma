@@ -60,6 +60,21 @@ function validarFormFormularios() {
     }
 
 }
+function validarFormLicenca() {
+    form = document.nFormLicencaEmitida;
+    if (null_or_empty("iLicenca")
+        || null_or_empty("iAno")
+        || null_or_empty("iNumeroLicenca")
+        || null_or_empty("iNumeroProtocolo")
+        || null_or_empty("iEmpreendimento")
+        || null_or_empty("iTipologia")
+    ) {
+        $(form).addClass('was-validated');
+    } else {
+        form.submit();
+    }
+
+}
 
 
 function null_or_empty(str) {

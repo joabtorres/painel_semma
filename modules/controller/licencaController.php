@@ -52,10 +52,10 @@ class licencaController
             return $arrayCad['error'];
         } else {
             $crudModel = crudModel::getInstance();
-            $cadHistorico = $crudModel->create("INSERT INTO legislacoes(categoria, esfera, numero, ano, data, ementa, diario, anexo) VALUES (:categoria, :esfera, :numero, :ano, :data, :ementa, :diario, :anexo)", $arrayCad);
+            $cadHistorico = $crudModel->create("INSERT INTO licencas_emitidas (licenca, ano, n_licenca, n_protocolo, data_emissao, data_validade, empreendimento, tipologia, observacao) VALUES (:licenca, :ano, :n_licenca, :n_protocolo, :data_emissao, :data_validade, :empreendimento, :tipologia, :observacao)", $arrayCad);
             if ($cadHistorico) {
                 $_SESSION['historico_acao'] = true;
-                $url = BASE_URL . "legislacao/cadastrar";
+                $url = BASE_URL . "licenca/cadastrar";
                 header("Location: " . $url);
             }
         }
@@ -64,12 +64,15 @@ class licencaController
     private function validarForm()
     {
         $arrayCad = array(
-            'categoria' => filter_input(INPUT_POST, 'nCategoria', FILTER_SANITIZE_SPECIAL_CHARS),
-            'esfera' => filter_input(INPUT_POST, 'nEsfera', FILTER_SANITIZE_SPECIAL_CHARS),
-            'numero' => filter_input(INPUT_POST, 'nNumero', FILTER_SANITIZE_SPECIAL_CHARS),
+            'licenca' => filter_input(INPUT_POST, 'nLicenca', FILTER_SANITIZE_SPECIAL_CHARS),
             'ano' => filter_input(INPUT_POST, 'nAno', FILTER_SANITIZE_SPECIAL_CHARS),
-            'data' => filter_input(INPUT_POST, 'nData', FILTER_SANITIZE_SPECIAL_CHARS),
-            'ementa' => filter_input(INPUT_POST, 'nEmenta', FILTER_SANITIZE_SPECIAL_CHARS),
+            'n_licenca' => filter_input(INPUT_POST, 'nNumeroLicenca', FILTER_SANITIZE_SPECIAL_CHARS),
+            'n_protocolo' => filter_input(INPUT_POST, 'nNumeroProtocolo', FILTER_SANITIZE_SPECIAL_CHARS),
+            'data_emissao' => filter_input(INPUT_POST, 'nDataEmissao', FILTER_SANITIZE_SPECIAL_CHARS),
+            'data_validade' => filter_input(INPUT_POST, 'nDataValidade', FILTER_SANITIZE_SPECIAL_CHARS),
+            'empreendimento' => filter_input(INPUT_POST, 'nEmpreendimento', FILTER_SANITIZE_SPECIAL_CHARS),
+            'tipologia' => filter_input(INPUT_POST, 'nTipologia', FILTER_SANITIZE_SPECIAL_CHARS),
+            'observacao' => filter_input(INPUT_POST, 'nDescricao', FILTER_SANITIZE_SPECIAL_CHARS),
         );
         return $arrayCad;
     }
