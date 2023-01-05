@@ -42,7 +42,7 @@ router::get('legislacao/editar/{id}', function ($arg) {
         $dados['arrayCad'] = $crud->read_specific('SELECT * FROM legislacoes WHERE md5(cod)=:cod', array('cod' => $arg['id']));
         $dados['categoria'] = $crud->read("SELECT DISTINCT(categoria) as categoria FROM legislacoes");
         $dados['esfera'] = $crud->read("SELECT DISTINCT(esfera) as esfera FROM legislacoes");
-
+        
         if (isset($_SESSION['historico_acao']) && !empty($_SESSION['historico_acao'])) {
             $_SESSION['historico_acao'] = false;
             $dados['error'] = array('class' => 'bg-success', 'msg' => "Alteração realizada com sucesso.");
@@ -62,7 +62,9 @@ router::post('legislacao/editar/{id}', function ($arg) {
         $dados['esfera'] = $crud->read("SELECT DISTINCT(esfera) as esfera FROM legislacoes");
         if (isset($_POST['nSalvar'])) {
             $legislcao = legislacaoController::getInstance();
+            $crud = crudModel::getInstance();
             $dados['error'] = $legislcao->editar();
+            $dados['arrayCad'] = $crud->read_specific('SELECT * FROM legislacoes WHERE md5(cod)=:cod', array('cod' => $arg['id']));
         }
         $template->loadTemplate('legislacoes/editar', $dados);
     }

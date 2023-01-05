@@ -1,73 +1,76 @@
 <?php
-
-router::get('formulario/cadastrar', function ($arg) {
+router::get('tr/cadastrar', function ($arg) {
     $user = usuarioController::getInstance();
     if ($user->checkUser()) {
-        $template = template::getInstance();
+        $view = template::getInstance();
         $dados = array();
         if (isset($_SESSION['historico_acao']) && !empty($_SESSION['historico_acao'])) {
             $_SESSION['historico_acao'] = false;
             $dados['error'] = array('class' => 'bg-success', 'msg' => "Cadastro realizado com sucesso.");
         }
-        $template->loadTemplate('formulario/cadastrar', $dados);
+        $view->loadTemplate('termo_de_referencia/cadastrar', $dados);
     }
 });
-
-router::post('formulario/cadastrar', function ($arg) {
+router::post('tr/cadastrar', function ($arg) {
     $user = usuarioController::getInstance();
     if ($user->checkUser()) {
         $template = template::getInstance();
-        $dados = array();
+        $dados = array('id' => '0');
         if (isset($_POST['nSalvar'])) {
-            $formulario = formularioController::getInstance();
-            $dados['error'] = $formulario->cadastrar();
+            $controller = trController::getInstance();
+            $dados['error'] = $controller->cadastrar();
         }
-        $template->loadTemplate('formulario/cadastrar', $dados);
+        $template->loadTemplate('termo_de_referencia/cadastrar', $dados);
     }
 });
-router::get('formulario/editar/{id}', function ($arg) {
+
+router::get('tr/editar/{id}', function ($arg) {
     $user = usuarioController::getInstance();
     if ($user->checkUser()) {
         $template = template::getInstance();
         $dados = array();
         $crud = crudModel::getInstance();
-        $dados['arrayCad'] = $crud->read_specific('SELECT * FROM formularios WHERE md5(cod)=:cod', array('cod' => $arg['id']));
+        $dados['arrayCad'] = $crud->read_specific('SELECT * FROM termos_de_referencia WHERE md5(id)=:id', array('id' => $arg['id']));
         if (isset($_SESSION['historico_acao']) && !empty($_SESSION['historico_acao'])) {
             $_SESSION['historico_acao'] = false;
             $dados['error'] = array('class' => 'bg-success', 'msg' => "Alteração realizada com sucesso.");
         }
         
-        $template->loadTemplate('formulario/editar', $dados);
+        $template->loadTemplate('termo_de_referencia/editar', $dados);
     }
 });
 
-router::post('formulario/editar/{id}', function ($arg) {
+router::post('tr/editar/{id}', function ($arg) {
     $user = usuarioController::getInstance();
     if ($user->checkUser()) {
         $template = template::getInstance();
         $dados = array();
         if (isset($_POST['nSalvar'])) {
-            $formulario = formularioController::getInstance();
-            $crud = crudModel::getInstance();
-            $dados['error'] = $formulario->editar();
-            $dados['arrayCad'] = $crud->read_specific('SELECT * FROM formularios WHERE md5(cod)=:cod', array('cod' => $arg['id']));
+            $controller = trController::getInstance();
+            $resultado = $controller->editar();
+            if(isset($resultado['error'])){
+                $dados['error'] = $resultado['error'];
+                $crud = crudModel::getInstance();
+                $dados['arrayCad'] = $crud->read_specific('SELECT * FROM termos_de_referencia WHERE md5(id)=:id', array('id' => $arg['id']));
+            }
         }
-        $template->loadTemplate('formulario/editar', $dados);
+        $template->loadTemplate('termo_de_referencia/editar', $dados);
     }
 });
 
-router::get('formulario/excluir/{id}', function ($arg) {
+router::get('tr/excluir/{id}', function ($arg) {
     $user = usuarioController::getInstance();
     if ($user->checkUser()) {
-        $formulario = formularioController::getInstance();
-        $formulario->excluir($arg['id']);
+        $controller = trController::getInstance();
+        $controller->excluir($arg['id']);
     }
 });
-router::get('formulario', function ($arg) {
-    $url = BASE_URL . 'formulario/1';
+
+router::get('tr', function ($arg) {
+    $url = BASE_URL . 'tr/1';
     header("location: $url");
 });
-router::get('formulario/{page}', function ($arg) {
+router::get('tr/{page}', function ($arg) {
     $user = usuarioController::getInstance();
     if ($user->checkUser()) {
         // echo $arg['page'];
@@ -75,24 +78,24 @@ router::get('formulario/{page}', function ($arg) {
         $dados = array();
         $crud = crudModel::getInstance();
         $dados['tipo'] = $crud->read("SELECT DISTINCT(tipo) as tipo FROM formularios");
-        $formulario = formularioController::getInstance();
+        $controller = trController::getInstance();
         if (filter_input(INPUT_GET, 'nBuscarBT')) {
-            $resultado = $formulario->consultarForm($arg['page']);
+            $resultado = $controller->consultarForm($arg['page']);
             $dados['total_registro'] = $resultado['total_registro'];
             $dados['paginas'] = $resultado['paginas'];
             $dados['pagina_atual'] = $resultado['pagina_atual'];
             $dados['parametros'] = $resultado['parametros'];
-            $dados['formularios'] = $resultado['formularios'];
+            $dados['resultadoDB'] = $resultado['resultadoDB'];
         } else {
-            $formulario = formularioController::getInstance();
-            $resultado = $formulario->consultar($arg['page']);
+            $controller = trController::getInstance();
+            $resultado = $controller->consultar($arg['page']);
             $dados['total_registro'] = $resultado['total_registro'];
             $dados['paginas'] = $resultado['paginas'];
             $dados['pagina_atual'] = $resultado['pagina_atual'];
             $dados['parametros'] = $resultado['parametros'];
-            $dados['formularios'] = $resultado['formularios'];
+            $dados['resultadoDB'] = $resultado['resultadoDB'];
         }
 
-        $template->loadTemplate('formulario/consultar', $dados);
+        $template->loadTemplate('termo_de_referencia/consultar', $dados);
     }
 });

@@ -50,7 +50,7 @@
                 </a>
                 <ul class="collapse" id="colapseLegislacao">
                     <li> <a href="<?php echo BASE_URL ?>legislacao/cadastrar"><i class="fa-regular fa-square-plus me-1 ms-3"></i> Cadastrar</a></li>
-                    <li> <a href="<?php echo BASE_URL ?>legislacao"><i class="fa-solid fa-magnifying-glass me-1 ms-3"></i>Consultar</a></li>
+                    <li> <a href="<?php echo BASE_URL ?>legislacao/1"><i class="fa-solid fa-magnifying-glass me-1 ms-3"></i>Consultar</a></li>
                 </ul>
             </li>
             <li>
@@ -60,7 +60,7 @@
                 </a>
                 <ul class="collapse" id="colapseFormulario">
                     <li> <a href="<?php echo BASE_URL ?>formulario/cadastrar"><i class="fa-regular fa-square-plus me-1 ms-3"></i> Cadastrar</a></li>
-                    <li> <a href="<?php echo BASE_URL ?>formulario"><i class="fa-solid fa-magnifying-glass me-1 ms-3"></i>Consultar</a></li>
+                    <li> <a href="<?php echo BASE_URL ?>formulario/1"><i class="fa-solid fa-magnifying-glass me-1 ms-3"></i>Consultar</a></li>
                 </ul>
             </li>
             <li>
@@ -79,8 +79,8 @@
                     Termos de Refêrencias
                 </a>
                 <ul class="collapse" id="colapseTR">
-                    <li> <a href="#"><i class="fa-regular fa-square-plus me-1 ms-3"></i> Cadastrar</a></li>
-                    <li> <a href="#"><i class="fa-solid fa-magnifying-glass me-1 ms-3"></i>Consultar</a></li>
+                    <li> <a href="<?php echo BASE_URL?>tr/cadastrar"><i class="fa-regular fa-square-plus me-1 ms-3"></i> Cadastrar</a></li>
+                    <li> <a href="<?php echo BASE_URL?>tr/1"><i class="fa-solid fa-magnifying-glass me-1 ms-3"></i>Consultar</a></li>
                 </ul>
             </li>
             <li>

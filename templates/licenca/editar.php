@@ -21,7 +21,7 @@
                 </div>
             </div>
         <?php } ?>
-        <form method="POST" name="nFormLicencaEmitida" enctype="multipart/form-data">
+        <form method="POST" name="nFormLicencaEmitida">
             <input type="hidden" id="iCod" value="<?php echo (!empty($arrayCad['cod'])) ? $arrayCad['cod'] : ''; ?>" name="nCod">
             <div class="col">
                 <div class="card">

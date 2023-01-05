@@ -18,4 +18,5 @@ router::getInstance()->loadRouteFile('login');
 router::getInstance()->loadRouteFile('grafico');
 router::getInstance()->loadRouteFile('legislacao');
 router::getInstance()->loadRouteFile('formulario');
-router::getInstance()->loadRouteFile('licencas');
+router::getInstance()->loadRouteFile('licenca');
+router::getInstance()->loadRouteFile('termos_de_referencia');
