@@ -20,3 +20,4 @@ router::getInstance()->loadRouteFile('legislacao');
 router::getInstance()->loadRouteFile('formulario');
 router::getInstance()->loadRouteFile('licenca');
 router::getInstance()->loadRouteFile('termos_de_referencia');
+router::getInstance()->loadRouteFile('usuario');

@@ -19,7 +19,7 @@ class usuarioModel extends database
     /**
      * Está função tem como objetivo instancia a classe crudModel uma vez e depois só refazer a reinstancia da mesma
      * @access public
-     * @return crudModel $inst - retorna a instancia criada
+     * @return usuarioModel $inst - retorna a instancia criada
      * @author Joab Torres <joabtorres1508@gmail.com>
      */
     public static function getInstance()
@@ -30,9 +30,29 @@ class usuarioModel extends database
         }
         return $inst;
     }
-
-    public function verificarEmail($email)
-    {
+    /**
+     * Está função é responsável para cadastrar novos usuarios;
+     * @param Array $data - Dados salvo em array para seres setados por um foreach;
+     * @access public
+     * @return boolean 
+     * @author Joab Torres <joabtorres1508@gmail.com>
+     */
+    public function create($data) {
+        try {
+            $sql = $this->db->prepare('INSERT INTO usuario (nome, nome_completo, email, senha, anexo) VALUES (:nome, :nome_completo, :email, :senha, :anexo)');
+            $sql->bindValue(":nome", $data['nome']);
+            $sql->bindValue(":nome_completo", $data['nome_completo']);
+            $sql->bindValue(":email", $data['email']);
+            $sql->bindValue(":senha", $data['senha']);
+            $sql->bindValue(":anexo", $data['anexo']);
+            $sql->execute();
+            return true;
+        } catch (PDOException $ex) {
+            die($ex->getMessage());
+        }
+    }
+    
+    public function verificarEmail($email){
         try {
             $sql = $this->db->prepare("SELECT * FROM usuario WHERE email=:email");
             $sql->bindValue(":email", $email);

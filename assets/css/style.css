@@ -28,7 +28,7 @@ body {
 }
 #content{
     padding: 20px;
-    min-height: calc(100vh - 70px);
+    min-height: calc(100vh - 50px);
 }
 
 #sidebar {
@@ -71,4 +71,13 @@ body {
 }
 .breadcrumb a{
     text-decoration: none;
+}
+
+#imageUser{
+    width: 140px;
+    height: 140px;
+    background-image: url('../image/user.png');
+    background-size: 140px;
+    background-position: center;
+    margin: auto;
 }

@@ -87,9 +87,64 @@ function validarFormTR() {
     }
 
 }
+function validarFormUsuario() {
+    form = document.nFormUsuario;
+    if (null_or_empty("iNome")
+        || null_or_empty("iNomeCompleto")
+        || null_or_empty("iEmail")
+        || null_or_empty("iSenha")
+        || null_or_empty("iRSenha")
+    ) {
+        $(form).addClass('was-validated');
+    } else {
+        form.submit();
+    }
+
+}
 
 
 function null_or_empty(str) {
     var v = document.getElementById(str).value;
     return v == null || v == "";
+}
+
+
+/**
+ * @author Joab Torres <joabtorres1508@gmail.com>
+ * @description Este codigo abaixo é responsável para fazer o carregamento da imagem setada pelo usuário ao muda a foto do perfil
+ */
+
+if (document.getElementById("usuario-form")) {
+    /**
+     * @author Joab Torres <joabtorres1508@gmail.com>
+     * @description Este codigo abaixo é responsável para fazer o carregamento da imagem setada pelo usuário ao muda a foto do perfil
+     */
+    $(function(){
+        $("#iAnexo").change(function(){
+            const file = $(this)[0].files[0];
+            if(file){
+                const fileReader = new FileReader;
+                fileReader.onloadend = function(){
+                    $("#imageUser").css('background-image', 'url('+fileReader.result+')');
+                }
+                fileReader.readAsDataURL(file);
+            }
+        });
+    });
+    /**
+     * @author Joab Torres <joabtorres1508@gmail.com>
+     * @description Este codigo abaixo é responsável para fazer o carregamento da imagem setada pelo usuário ao muda a foto do perfil
+     */
+    $(function(){
+        $('#imagemPadrao').click(function () {
+            console.log('chegou aqui')
+            $("#imageUser").css('background-image', 'url("../assets/image/user.png")');
+            if ($("#iLinkAnexo").val() !== null) {
+                $("#iLinkAnexo").val(null);
+            }
+            if ($("#iAnexo").val() !== null) {
+                $("#iAnexo").val(null);
+            }
+        });
+    })
 }

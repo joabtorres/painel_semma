@@ -89,12 +89,12 @@
                     Usuários
                 </a>
                 <ul class="collapse" id="colapseUsuarios">
-                    <li> <a href="#"><i class="fa-regular fa-square-plus me-1 ms-3"></i> Cadastrar</a></li>
-                    <li> <a href="#"><i class="fa-solid fa-magnifying-glass me-1 ms-3"></i>Consultar</a></li>
+                    <li> <a href="<?php echo BASE_URL?>usuario/cadastrar"><i class="fa-regular fa-square-plus me-1 ms-3"></i> Cadastrar</a></li>
+                    <li> <a href="<?php echo BASE_URL?>usuario/1"><i class="fa-solid fa-magnifying-glass me-1 ms-3"></i>Consultar</a></li>
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="<?php BASE_URL ?>sair" class="nav-link" aria-current="page">
+                <a href="<?php echo BASE_URL ?>sair" class="nav-link" aria-current="page">
                     <i class="fa-solid fa-arrow-right-from-bracket me-1"></i>
                     Sair
                 </a>
@@ -135,12 +135,12 @@
         </nav>
         <?php template::getInstance()->loadViewInTemplate($viewName, $viewData); ?>
     </div>
-    <footer id="footer_painel" class="text-end">
+    <footer id="footer_painel " class="text-end">
         <div class="container-fluid">
             <div class="row">
                 <div class="col">
                     <hr class="mb-0 mt-2" />
-                    <p class="text-muted">&copy; Copyright 2022 - <a href="http://joabtorres.com.br" target="_blank" class="text-decoration-none">Joab Torres Alencar</a></p>
+                    <p class="text-muted mt-0 me-2">&copy; Copyright 2022 - <a href="http://joabtorres.com.br" target="_blank" class="text-decoration-none">Joab Torres Alencar</a></p>
                 </div>
             </div>
         </div>

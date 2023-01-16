@@ -115,7 +115,7 @@ function geraGraficoBarraVertical(array, id_grafico) {
 }
 
 function cor(num) {
-    var cores = ['#00a65a', '#dd4b39', '#e89e29', '#6c5ae2', '#543324', '#ed6636', , '#121833', '#0c799a', '#d9b557', '#1888b8'];
+    var cores = ['#00a65a', '#dd4b39', '#e89e29', '#6c5ae2', '#543324', '#ed6636', , '#121833', '#931a39', '#d9b557', '#1888b8', '#b6c353', '#0a441c', '#865b3f', '#6123a4'];
     return cores[num];
 }
 
