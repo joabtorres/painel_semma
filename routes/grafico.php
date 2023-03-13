@@ -4,7 +4,7 @@ router::get('grafico/visitantes', function ($arg) {
     $user = usuarioController::getInstance();
     if ($user->checkUser()) {
         $crud = crudModel::getInstance();
-        $resultado = $crud->read("SELECT mes as label, vizualizacoes as data FROM visitantes WHERE ano=:ano", array('ano' => date('Y')));
+        $resultado = $crud->read("SELECT mes as label, COUNT(*) as data FROM visitantes GROUP BY mes");
         echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
     }
 });
