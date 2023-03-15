@@ -79,6 +79,7 @@ function validarFormTR() {
     form = document.nFormTR;
     if (null_or_empty("iTipo")
         || null_or_empty("iData")
+        || null_or_empty("iStatus")
         || null_or_empty("iDescricao")
     ) {
         $(form).addClass('was-validated');

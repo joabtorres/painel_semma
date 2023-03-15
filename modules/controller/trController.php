@@ -20,7 +20,7 @@ class trController
             return $arrayCad['error'];
         } else {
             $crudModel = crudModel::getInstance();
-            $cadHistorico = $crudModel->create("INSERT INTO termos_de_referencia (tipo, data, descricao, anexo) VALUES (:tipo, :data, :descricao, :anexo)", $arrayCad);
+            $cadHistorico = $crudModel->create("INSERT INTO termos_de_referencia (tipo, data, status, descricao, anexo) VALUES (:tipo, :data, :status, :descricao, :anexo)", $arrayCad);
             if ($cadHistorico) {
                 $_SESSION['historico_acao'] = true;
                 $url = BASE_URL . "tr/cadastrar";
@@ -32,11 +32,12 @@ class trController
     {
         $arrayCad = $this->validarForm();
         if (isset($arrayCad['error']) && !empty($arrayCad['error'])) {
-            return $arrayCad;
+            return $arrayCad['error'];
         } else {
             $arrayCad['id'] = filter_input(INPUT_POST, 'nCod', FILTER_SANITIZE_SPECIAL_CHARS);
             $crudModel = crudModel::getInstance();
-            $cadHistorico = $crudModel->update("UPDATE termos_de_referencia SET tipo=:tipo, data=:data, descricao=:descricao, anexo=:anexo WHERE id=:id", $arrayCad);
+            $cadHistorico = $crudModel->update("UPDATE termos_de_referencia SET tipo=:tipo, data=:data, status=:status, descricao=:descricao, anexo=:anexo WHERE id=:id", $arrayCad);
+            
             if ($cadHistorico) {
                 $_SESSION['historico_acao'] = true;
                 $url = BASE_URL . "tr/editar/" . md5($arrayCad['id']);
@@ -126,6 +127,7 @@ class trController
         $arrayCad = array(
             'tipo' => filter_input(INPUT_POST, 'nTipo', FILTER_SANITIZE_SPECIAL_CHARS),
             'data' => filter_input(INPUT_POST, 'nData', FILTER_SANITIZE_SPECIAL_CHARS),
+            'status' => filter_input(INPUT_POST, 'nStatus', FILTER_SANITIZE_SPECIAL_CHARS),
             'descricao' => filter_input(INPUT_POST, 'nDescricao', FILTER_SANITIZE_SPECIAL_CHARS),
         );
         $arrayCad['anexo'] = $this->salvarArquivo($_FILES['nAnexo'], filter_input(INPUT_POST, 'nLinkAnexo'));

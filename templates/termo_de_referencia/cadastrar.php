@@ -43,6 +43,24 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 mt-1">
+                                        <label for="iStatus" class="form-label">Status:</label>
+                                        <select class="form-select" name="nStatus" id="iStatus">
+                                            <?php 
+                                            $array = array(0 => 'Desativado', 1 => 'Ativo');
+                                                for($i=0; $i<count($array); $i++){
+                                                    if($i == $arrayCad['status']){
+                                                        echo '<option value="'.$i.'" selected="true">'.$array[$i].'</option>';
+                                                    }else{
+                                                        echo '<option value="'.$i.'" >'.$array[$i].'</option>';
+                                                    }
+                                                }
+                                            ?>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Informe o status
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mt-1">
                                         <label for="iData" class="form-label">Data:</label>
                                         <input type="text" class="form-control" id="iData" name="nData" placeholder="Exmplo: Janeiro/2022" required value="<?php echo (!empty($arrayCad['data'])) ? $arrayCad['data'] : ''; ?>">
                                         <div class="invalid-feedback">

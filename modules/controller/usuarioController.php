@@ -167,4 +167,63 @@ class usuarioController {
         }
     }
 
+    public function consultarForm($page)
+    {
+        $filtro = filter_input(INPUT_GET, 'nSelectBuscar', FILTER_SANITIZE_SPECIAL_CHARS);
+        $campo = filter_input(INPUT_GET, 'nCampo', FILTER_SANITIZE_SPECIAL_CHARS);
+        $arrayForm = array();
+        $crudModel = crudModel::getInstance();
+        $sql = "SELECT * FROM usuario WHERE id>0 ";
+        //nSelectBuscar
+        if ($filtro) {
+            switch ($filtro) {
+                case 'nome_completo':
+                    $sql .= " AND nome_completo LIKE '%$campo%' ";
+                    break;
+                case 'email':
+                    $sql .= " AND email LIKE '%$campo%' ";
+                    break;
+            }
+        }
+        //paginacao
+        $limite = 50;
+        $total_registro = $crudModel->read($sql, $arrayForm);
+        $total_registro = empty($total_registro) ? array() : $total_registro;
+        $paginas = count($total_registro) / $limite;
+        $indice = 0;
+        $pagina_atual = (isset($page) && !empty($page)) ? addslashes($page) : 1;
+        $indice = ($pagina_atual - 1) * $limite;
+        $resultado = array(
+            'total_registro' => count($total_registro),
+            'paginas' => $paginas,
+            'pagina_atual' => $pagina_atual,
+            'parametros' => "?nSelectBuscar=$filtro&nCampo=$campo&nBuscarBT=BuscarBT"
+        );
+        $sql .= "  ORDER BY id ASC LIMIT $indice,$limite ";
+        $resultado['resultadoDB'] = $crudModel->read($sql, $arrayForm);
+        return $resultado;
+    }
+    public function consultar($page)
+    {
+        $crudModel = crudModel::getInstance();
+        $arrayForm = array();
+        $sql = "SELECT * FROM usuario WHERE id>0 ";
+        //paginacao
+        $limite = 50;
+        $total_registro = $crudModel->read($sql, $arrayForm);
+        $total_registro = empty($total_registro) ? array() : $total_registro;
+        $paginas = count($total_registro) / $limite;
+        $indice = 0;
+        $pagina_atual = (isset($page) && !empty($page)) ? addslashes($page) : 1;
+        $indice = ($pagina_atual - 1) * $limite;
+        $resultado = array(
+            'total_registro' => count($total_registro),
+            'paginas' => $paginas,
+            'pagina_atual' => $pagina_atual,
+            'parametros' => null
+        );
+        $sql .= "  ORDER BY id ASC LIMIT $indice,$limite ";
+        $resultado['resultadoDB'] = $crudModel->read($sql, $arrayForm);
+        return $resultado;
+    }
 }

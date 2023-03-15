@@ -35,7 +35,7 @@ router::get('tr/editar/{id}', function ($arg) {
             $_SESSION['historico_acao'] = false;
             $dados['error'] = array('class' => 'bg-success', 'msg' => "Alteração realizada com sucesso.");
         }
-        
+
         $template->loadTemplate('termo_de_referencia/editar', $dados);
     }
 });
@@ -47,13 +47,15 @@ router::post('tr/editar/{id}', function ($arg) {
         $dados = array();
         if (isset($_POST['nSalvar'])) {
             $controller = trController::getInstance();
-            $resultado = $controller->editar();
-            if(isset($resultado['error'])){
-                $dados['error'] = $resultado['error'];
-                $crud = crudModel::getInstance();
-                $dados['arrayCad'] = $crud->read_specific('SELECT * FROM termos_de_referencia WHERE md5(id)=:id', array('id' => $arg['id']));
+            $crud = crudModel::getInstance();
+            $dados['error'] = $controller->editar();
+            $dados['arrayCad'] = $crud->read_specific('SELECT * FROM termos_de_referencia WHERE md5(id)=:id', array('id' => $arg['id']));
+            if (isset($_SESSION['historico_acao']) && !empty($_SESSION['historico_acao'])) {
+                $_SESSION['historico_acao'] = false;
+                $dados['error'] = array('class' => 'bg-success', 'msg' => "Alteração realizada com sucesso.");
             }
-        }
+        } 
+
         $template->loadTemplate('termo_de_referencia/editar', $dados);
     }
 });

@@ -27,7 +27,7 @@ class helper
     public static function getInstance() {
         static $inst = null;
         if ($inst === null) {
-            $inst = new router();
+            $inst = new helper();
         }
         return $inst;
     }

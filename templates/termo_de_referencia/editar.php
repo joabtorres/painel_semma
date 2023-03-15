@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col">
             <h4 class="mb-1 ms-2"></i>
-                    Editar termos de refêrencias</h4>
+                Editar termos de refêrencias</h4>
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb p-2 rounded">
                     <li class="breadcrumb-item" aria-current="page"><a href="<?php echo BASE_URL ?>"> <i class="fa-solid fa-mug-hot me-1"></i>Página Inicial</a></li>
@@ -15,7 +15,7 @@
         </div>
     </div>
     <div class="row">
-        <?php 
+        <?php
         if (!empty($error)) { ?>
             <div class="col">
                 <div class="alert <?php echo $error['class'] ?> text-white alert-dismissible fade show" role="alert">
@@ -40,6 +40,24 @@
                                         <input type="text" class="form-control" id="iTipo" name="nTipo" placeholder="Exemplo: Termo de Referência " required value="<?php echo (!empty($arrayCad['tipo'])) ? $arrayCad['tipo'] : ''; ?>">
                                         <div class="invalid-feedback">
                                             Informe o tipo
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mt-1">
+                                        <label for="iStatus" class="form-label">Status:</label>
+                                        <select class="form-select" name="nStatus" id="iStatus">
+                                            <?php 
+                                            $array = array(0 => 'Desativado', 1 => 'Ativo');
+                                                for($i=0; $i<count($array); $i++){
+                                                    if($i == $arrayCad['status']){
+                                                        echo '<option value="'.$i.'" selected="true">'.$array[$i].'</option>';
+                                                    }else{
+                                                        echo '<option value="'.$i.'" >'.$array[$i].'</option>';
+                                                    }
+                                                }
+                                            ?>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Informe o status
                                         </div>
                                     </div>
                                     <div class="col-md-12 mt-1">
