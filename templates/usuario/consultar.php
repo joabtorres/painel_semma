@@ -90,7 +90,7 @@
                                         </td>
                                         <td class="table-acao text-center">
                                             <button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#modal_vizualizar_<?php echo md5($indice['id']) ?>" title="Visualizar"><i class="fa fa-eye"></i></button>
-                                            <a class="btn btn-outline-primary btn-sm" href="<?php echo BASE_URL . 'tr/editar/' . md5($indice['id']); ?>" title="Editar"><i class="fa fa-pencil-alt"></i></a>
+                                            <a class="btn btn-outline-primary btn-sm" href="<?php echo BASE_URL . 'usuario/editar/' . md5($indice['id']); ?>" title="Editar"><i class="fa fa-pencil-alt"></i></a>
                                             <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal_relatorio_<?php echo md5($indice['id']) ?>" title="Excluir"><i class="fa fa-trash"></i></button>
                                         </td>
                                     </tr>

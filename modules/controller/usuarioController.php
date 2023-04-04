@@ -1,12 +1,14 @@
 <?php
 
-class usuarioController {
+class usuarioController
+{
 
-    private function __construct() {
-        
+    private function __construct()
+    {
     }
 
-    public static function getInstance() {
+    public static function getInstance()
+    {
         static $inst = null;
         if ($inst === null) {
             $inst = new usuarioController();
@@ -14,7 +16,8 @@ class usuarioController {
         return $inst;
     }
 
-    public function logar() {
+    public function logar()
+    {
         $arrayCad = array(
             'usuario' => filter_input(INPUT_POST, 'nUsuario', FILTER_VALIDATE_EMAIL),
             'senha' => filter_input(INPUT_POST, 'nSenha')
@@ -36,7 +39,8 @@ class usuarioController {
         }
     }
 
-    private function iniciarSessao($usuario) {
+    private function iniciarSessao($usuario)
+    {
         $_SESSION['usuario']['id'] = $usuario['id'];
         $_SESSION['usuario']['nome'] = $usuario['nome'];
         $_SESSION['usuario']['anexo'] = $usuario['anexo'];
@@ -45,25 +49,29 @@ class usuarioController {
         header("location: $url");
     }
 
-    public function getId() {
+    public function getId()
+    {
         if (isset($_SESSION['usuario']) && $_SESSION['usuario']['id'] > 0) {
             return $_SESSION['usuario']['id'];
         }
     }
 
-    public function getNome() {
+    public function getNome()
+    {
         if (isset($_SESSION['usuario']) && !empty($_SESSION['usuario']['nome'])) {
             return $_SESSION['usuario']['nome'];
         }
     }
 
-    public function getAnexo() {
+    public function getAnexo()
+    {
         if (isset($_SESSION['usuario']) && !empty($_SESSION['usuario']['anexo'])) {
             return $_SESSION['usuario']['anexo'];
         }
     }
 
-    public function checkUser() {
+    public function checkUser()
+    {
         if (isset($_SESSION['usuario']) && $_SESSION['usuario']['status'] > 0) {
             return $_SESSION['usuario']['status'];
         } else {
@@ -72,7 +80,8 @@ class usuarioController {
         }
     }
 
-    public function sair() {
+    public function sair()
+    {
         if (isset($_SESSION['usuario'])) {
             $_SESSION = array();
         }
@@ -80,7 +89,69 @@ class usuarioController {
         header("location: $url");
     }
 
-    public function cadastrar() {
+    public function editar()
+    {
+        $arrayCad = $this->validarForm();
+        $usuarioModel = usuarioModel::getInstance();
+        $arrayError = array(
+            'class' => 'bg-danger',
+            'msg' => array()
+        );
+        $arrayCad['id'] = filter_input(INPUT_POST, 'nCod', FILTER_SANITIZE_SPECIAL_CHARS);
+        $verificarEmail = $usuarioModel->usuario_especifico("SELECT * FROM usuario WHERE email=:email and id!=:id", array('email' => $arrayCad['email'], 'id' => $arrayCad['id']));
+        if (!empty($verificarEmail)) {
+            unset($arrayCad['email']);
+            $arrayError['msg'][] = 'E-mail já cadastrado por outro usuário, informe outro e-mail.';
+        }
+        if ($arrayCad['senha'] != $arrayCad['rsenha']) {
+            unset($arrayCad['senha']);
+            unset($arrayCad['rsenha']);
+            $arrayError['msg'][] = 'Os campos <b>senha</b> e <b>repetir senha</b> estão inválidos, preencha corretamente.';
+        } else if (empty($arrayCad['senha']) || empty($arrayCad['rsenha'])) {
+            unset($arrayCad['senha']);
+            unset($arrayCad['rsenha']);
+            $arrayError['msg'][] = 'Os campos <b>senha</b> e <b>repetir senha</b> estão inválidos, preencha corretamente.';
+        }
+        if (empty($arrayError['msg'])) {
+            $arrayCad['anexo'] = $this->salvarArquivo($_FILES['nAnexo'], filter_input(INPUT_POST, 'nLinkAnexo'));
+            if (isset($arrayCad['anexo']['error'])) {
+                $arrayError['msg'][] = $arrayCad['anexo']['error'];
+            } else if (empty($arrayCad['anexo'])) {
+                $anexoUsuario = $usuarioModel->usuario_especifico('SELECT anexo FROM usuario WHERE id=:id', array('id' => $arrayCad['id']));
+                if (!empty($anexoUsuario)) {
+                    if (file_exists($anexoUsuario['anexo'])) {
+                        unlink($anexoUsuario['anexo']); //arquivo removido 
+                    }
+                }
+            }
+        }
+        if (isset($arrayError['msg']) && is_array($arrayError['msg']) && !empty($arrayError['msg'])) {
+            return $arrayReturn = array('arrayCad' => $arrayCad, 'arrayError' => $arrayError);
+        } else {
+            if (isset($arrayCad['senha'])) {
+                $arrayCad['senha'] = password_hash($arrayCad['senha'], PASSWORD_BCRYPT);
+            }
+            //$usuarioModel->update($arrayCad);
+        }
+        print_r($arrayCad);
+        /*
+        $arrayCad = $this->validarForm();
+        if (isset($arrayCad['error']) && !empty($arrayCad['error'])) {
+            return $arrayCad['error'];
+        } else {
+            $arrayCad['cod'] = filter_input(INPUT_POST, 'nCod', FILTER_SANITIZE_SPECIAL_CHARS);
+            $crudModel = crudModel::getInstance();
+            $cadHistorico = $crudModel->update("UPDATE legislacoes SET categoria=:categoria, esfera=:esfera, numero=:numero, ano=:ano, data=:data, ementa=:ementa, diario=:diario, anexo=:anexo WHERE cod=:cod", $arrayCad);
+            if ($cadHistorico) {
+                $_SESSION['historico_acao'] = true;
+                $url = BASE_URL . "legislacao/editar/" . md5($arrayCad['cod']);
+                header("Location: " . $url);
+            }
+        }*/
+    }
+
+    public function cadastrar()
+    {
         $arrayCad = $this->validarForm();
         $usuarioModel = usuarioModel::getInstance();
         $arrayError = array(
@@ -110,7 +181,8 @@ class usuarioController {
         }
     }
 
-    private function validarForm() {
+    private function validarForm()
+    {
         $arrayCad = array(
             'nome' => filter_input(INPUT_POST, 'nNome', FILTER_SANITIZE_SPECIAL_CHARS),
             'nome_completo' => filter_input(INPUT_POST, 'nNomeCompleto', FILTER_SANITIZE_SPECIAL_CHARS),
@@ -121,7 +193,8 @@ class usuarioController {
         return $arrayCad;
     }
 
-    private function salvarArquivo($arquivo, $url_file) {
+    private function salvarArquivo($arquivo, $url_file)
+    {
         if (!empty($arquivo['tmp_name'])) {
             if ($arquivo['type'] == 'image/png' || $arquivo['type'] == 'image/jpeg') {
                 $imagem = array();

@@ -27,6 +27,37 @@ router::post('usuario/cadastrar', function ($arg) {
     }
 });
 
+router::get('usuario/editar/{id}', function ($arg) {
+    $user = usuarioController::getInstance();
+    if ($user->checkUser()) {
+        $template = template::getInstance();
+        $dados = array();
+        $crud = crudModel::getInstance();
+        $dados['arrayCad'] = $crud->read_specific('SELECT * FROM usuario WHERE md5(id)=:id', array('id' => $arg['id']));
+        if (isset($_SESSION['historico_acao']) && !empty($_SESSION['historico_acao'])) {
+            $_SESSION['historico_acao'] = false;
+            $dados['error'] = array('class' => 'bg-success', 'msg' => "Alteração realizada com sucesso.");
+        }
+
+        $template->loadTemplate('usuario/editar', $dados);
+    }
+});
+
+router::post('usuario/editar/{id}', function ($arg) {
+    $user = usuarioController::getInstance();
+    if ($user->checkUser()) {
+        $template = template::getInstance();
+        $dados = array();
+        $crud = crudModel::getInstance();
+        if (isset($_POST['nSalvar'])) {
+            $usuario = usuarioController::getInstance();
+            $dados['error'] = $usuario->editar();
+            echo 'chegou aquiuii';
+        }
+        $template->loadTemplate('usuario/editar', $dados);
+    }
+});
+
 
 router::get('usuario', function ($arg) {
     $url = BASE_URL . 'usuario/1';
