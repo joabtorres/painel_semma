@@ -97,20 +97,20 @@ class usuarioController
             'class' => 'bg-danger',
             'msg' => array()
         );
-        $arrayCad['id'] = filter_input(INPUT_POST, 'nCod', FILTER_SANITIZE_SPECIAL_CHARS);
-        $verificarEmail = $usuarioModel->usuario_especifico("SELECT * FROM usuario WHERE email=:email and id!=:id", array('email' => $arrayCad['email'], 'id' => $arrayCad['id']));
-        if (!empty($verificarEmail)) {
+
+        if ($usuarioModel->usuario_especifico("SELECT * FROM usuario WHERE email=:email and id!=:id", array('email' => $arrayCad['email'], 'id' => $arrayCad['id']))) {
             unset($arrayCad['email']);
             $arrayError['msg'][] = 'E-mail já cadastrado por outro usuário, informe outro e-mail.';
         }
-        if ($arrayCad['senha'] != $arrayCad['rsenha']) {
+        if (empty($arrayCad['senha']) && empty($arrayCad['rsenha'])) {
             unset($arrayCad['senha']);
             unset($arrayCad['rsenha']);
-            $arrayError['msg'][] = 'Os campos <b>senha</b> e <b>repetir senha</b> estão inválidos, preencha corretamente.';
-        } else if (empty($arrayCad['senha']) || empty($arrayCad['rsenha'])) {
-            unset($arrayCad['senha']);
-            unset($arrayCad['rsenha']);
-            $arrayError['msg'][] = 'Os campos <b>senha</b> e <b>repetir senha</b> estão inválidos, preencha corretamente.';
+        } else {
+            if ($arrayCad['senha'] != $arrayCad['rsenha']) {
+                unset($arrayCad['senha']);
+                unset($arrayCad['rsenha']);
+                $arrayError['msg'][] = 'Os campos <b>senha</b> e <b>repetir senha</b> estão inválidos, preencha corretamente.';
+            }
         }
         if (empty($arrayError['msg'])) {
             $arrayCad['anexo'] = $this->salvarArquivo($_FILES['nAnexo'], filter_input(INPUT_POST, 'nLinkAnexo'));
@@ -126,28 +126,19 @@ class usuarioController
             }
         }
         if (isset($arrayError['msg']) && is_array($arrayError['msg']) && !empty($arrayError['msg'])) {
-            return $arrayReturn = array('arrayCad' => $arrayCad, 'arrayError' => $arrayError);
+            return array('arrayCad' => $arrayCad, 'arrayError' => $arrayError);
         } else {
-            if (isset($arrayCad['senha'])) {
+            if (!empty($arrayCad['senha'])) {
                 $arrayCad['senha'] = password_hash($arrayCad['senha'], PASSWORD_BCRYPT);
             }
-            //$usuarioModel->update($arrayCad);
-        }
-        print_r($arrayCad);
-        /*
-        $arrayCad = $this->validarForm();
-        if (isset($arrayCad['error']) && !empty($arrayCad['error'])) {
-            return $arrayCad['error'];
-        } else {
-            $arrayCad['cod'] = filter_input(INPUT_POST, 'nCod', FILTER_SANITIZE_SPECIAL_CHARS);
-            $crudModel = crudModel::getInstance();
-            $cadHistorico = $crudModel->update("UPDATE legislacoes SET categoria=:categoria, esfera=:esfera, numero=:numero, ano=:ano, data=:data, ementa=:ementa, diario=:diario, anexo=:anexo WHERE cod=:cod", $arrayCad);
+            $cadHistorico =  $usuarioModel->update($arrayCad);
             if ($cadHistorico) {
                 $_SESSION['historico_acao'] = true;
-                $url = BASE_URL . "legislacao/editar/" . md5($arrayCad['cod']);
+                $url = BASE_URL . "usuario/editar/" . md5($arrayCad['id']);
                 header("Location: " . $url);
             }
-        }*/
+            return array();
+        }
     }
 
     public function cadastrar()
@@ -166,6 +157,10 @@ class usuarioController
             unset($arrayCad['senha']);
             unset($arrayCad['rsenha']);
             $arrayError['msg'][] = 'Os campos <b>senha</b> e <b>repetir senha</b> estão inválidos, preencha corretamente.';
+        } else if (strlen($arrayCad['senha']) < 8) {
+            unset($arrayCad['senha']);
+            unset($arrayCad['rsenha']);
+            $arrayError['msg'][] = 'Os campos <b>senha</b> e <b>repetir senha</b> devem possuir no minimo 8 digitos, preencha corretamente.';
         }
         if (empty($arrayError['msg'])) {
             $arrayCad['anexo'] = $this->salvarArquivo($_FILES['nAnexo'], filter_input(INPUT_POST, 'nLinkAnexo'));
@@ -174,21 +169,29 @@ class usuarioController
             }
         }
         if (isset($arrayError['msg']) && is_array($arrayError['msg']) && !empty($arrayError['msg'])) {
-            return $arrayReturn = array('arrayCad' => $arrayCad, 'arrayError' => $arrayError);
+            return array('arrayCad' => $arrayCad, 'arrayError' => $arrayError);
         } else {
             $arrayCad['senha'] = password_hash($arrayCad['senha'], PASSWORD_BCRYPT);
-            $usuarioModel->create($arrayCad);
+            $cadHistorico = $usuarioModel->create($arrayCad);
+            if ($cadHistorico) {
+                $_SESSION['historico_acao'] = true;
+                $url = BASE_URL . "usuario/cadastrar";
+                header("Location: " . $url);
+            }
+            return array();
         }
     }
 
     private function validarForm()
     {
         $arrayCad = array(
+            'id' => filter_input(INPUT_POST, 'nCod', FILTER_SANITIZE_SPECIAL_CHARS),
             'nome' => filter_input(INPUT_POST, 'nNome', FILTER_SANITIZE_SPECIAL_CHARS),
             'nome_completo' => filter_input(INPUT_POST, 'nNomeCompleto', FILTER_SANITIZE_SPECIAL_CHARS),
             'email' => filter_input(INPUT_POST, 'nEmail', FILTER_SANITIZE_EMAIL),
             'senha' => filter_input(INPUT_POST, 'nSenha'),
-            'rsenha' => filter_input(INPUT_POST, 'nRSenha')
+            'rsenha' => filter_input(INPUT_POST, 'nRSenha'),
+            'status' => filter_input(INPUT_POST, 'nStatus', FILTER_SANITIZE_SPECIAL_CHARS)
         );
         return $arrayCad;
     }
@@ -298,5 +301,20 @@ class usuarioController
         $sql .= "  ORDER BY id ASC LIMIT $indice,$limite ";
         $resultado['resultadoDB'] = $crudModel->read($sql, $arrayForm);
         return $resultado;
+    }
+
+    public function excluir($id)
+    {
+        $userModel = usuarioModel::getInstance();
+        $resultado = $userModel->usuario_especifico('SELECT * FROM usuario WHERE md5(id) = :id', array('id' => $id));
+        if (is_array($resultado)) {
+            if (file_exists($resultado['anexo'])) {
+                unlink($resultado['anexo']);
+            }
+            if ($userModel->remove($resultado['id'])) {
+                $url = BASE_URL . "usuario/usuario/1";
+                header("Location: " . $url);
+            }
+        }
     }
 }

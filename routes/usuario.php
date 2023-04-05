@@ -1,14 +1,18 @@
 <?php
 
-router::get('usuario/cadastrar', function($arg){
+router::get('usuario/cadastrar', function ($arg) {
     $user = usuarioController::getInstance();
-    if($user->checkUser()){
+    if ($user->checkUser()) {
         $template = template::getInstance();
         $dados = array();
 
         if (isset($_SESSION['historico_acao']) && !empty($_SESSION['historico_acao'])) {
             $_SESSION['historico_acao'] = false;
-            $dados['error'] = array('class' => 'bg-success', 'msg' => "Cadastro realizado com sucesso.");
+            $arrayError = array(
+                'class' => 'bg-success',
+                'msg' => array('Cadastro realizado com sucesso')
+            );
+            $dados['arrayError'] = $arrayError;
         }
 
         $template->loadTemplate('usuario/cadastrar', $dados);
@@ -21,7 +25,7 @@ router::post('usuario/cadastrar', function ($arg) {
         $template = template::getInstance();
         $dados = array();
         if (isset($_POST['nSalvar'])) {
-            $dados = $user->cadastrar();
+            $dados = !empty($user->cadastrar()) ? $user->cadastrar() : '';
         }
         $template->loadTemplate('usuario/cadastrar', $dados);
     }
@@ -36,7 +40,11 @@ router::get('usuario/editar/{id}', function ($arg) {
         $dados['arrayCad'] = $crud->read_specific('SELECT * FROM usuario WHERE md5(id)=:id', array('id' => $arg['id']));
         if (isset($_SESSION['historico_acao']) && !empty($_SESSION['historico_acao'])) {
             $_SESSION['historico_acao'] = false;
-            $dados['error'] = array('class' => 'bg-success', 'msg' => "Alteração realizada com sucesso.");
+            $arrayError = array(
+                'class' => 'bg-success',
+                'msg' => array('Alteração realizada com sucesso')
+            );
+            $dados['arrayError'] = $arrayError;
         }
 
         $template->loadTemplate('usuario/editar', $dados);
@@ -48,11 +56,8 @@ router::post('usuario/editar/{id}', function ($arg) {
     if ($user->checkUser()) {
         $template = template::getInstance();
         $dados = array();
-        $crud = crudModel::getInstance();
         if (isset($_POST['nSalvar'])) {
-            $usuario = usuarioController::getInstance();
-            $dados['error'] = $usuario->editar();
-            echo 'chegou aquiuii';
+            $dados = !empty($user->editar()) ? $user->editar() : '';
         }
         $template->loadTemplate('usuario/editar', $dados);
     }
@@ -63,6 +68,7 @@ router::get('usuario', function ($arg) {
     $url = BASE_URL . 'usuario/1';
     header("location: $url");
 });
+
 router::get('usuario/{page}', function ($arg) {
     $user = usuarioController::getInstance();
     if ($user->checkUser()) {
@@ -89,5 +95,12 @@ router::get('usuario/{page}', function ($arg) {
         }
 
         $template->loadTemplate('usuario/consultar', $dados);
+    }
+});
+
+router::get('usuario/excluir/{id}', function ($arg) {
+    $user = usuarioController::getInstance();
+    if ($user->checkUser()) {
+        $user->excluir($arg['id']);
     }
 });

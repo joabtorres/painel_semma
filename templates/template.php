@@ -32,7 +32,7 @@
 
     <div class="offcanvas offcanvas-start d-flex flex-column flex-shrink-0 p-3 bg-light" tabindex="-1" id="sidebar" aria-labelledby="offcanvasExampleLabel" style="width: 280px;">
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-            <img src="<?php echo BASE_URL.usuarioController::getInstance()->getAnexo()?>" alt="" width="50" height="50" class="rounded-circle me-2">
+            <img src="<?php echo file_exists(usuarioController::getInstance()->getAnexo()) ? BASE_URL . usuarioController::getInstance()->getAnexo() : BASE_URL . 'assets/image/user.png' ?>" alt="" width="50" height="50" class="rounded-circle me-2">
             <span class="fs-5"><?php echo usuarioController::getInstance()->getNome() ?></span>
         </a>
         <hr>
@@ -79,8 +79,8 @@
                     Termos de Refêrencias
                 </a>
                 <ul class="collapse" id="colapseTR">
-                    <li> <a href="<?php echo BASE_URL?>tr/cadastrar"><i class="fa-regular fa-square-plus me-1 ms-3"></i> Cadastrar</a></li>
-                    <li> <a href="<?php echo BASE_URL?>tr/1"><i class="fa-solid fa-magnifying-glass me-1 ms-3"></i>Consultar</a></li>
+                    <li> <a href="<?php echo BASE_URL ?>tr/cadastrar"><i class="fa-regular fa-square-plus me-1 ms-3"></i> Cadastrar</a></li>
+                    <li> <a href="<?php echo BASE_URL ?>tr/1"><i class="fa-solid fa-magnifying-glass me-1 ms-3"></i>Consultar</a></li>
                 </ul>
             </li>
             <li>
@@ -89,15 +89,9 @@
                     Usuários
                 </a>
                 <ul class="collapse" id="colapseUsuarios">
-                    <li> <a href="<?php echo BASE_URL?>usuario/cadastrar"><i class="fa-regular fa-square-plus me-1 ms-3"></i> Cadastrar</a></li>
-                    <li> <a href="<?php echo BASE_URL?>usuario/1"><i class="fa-solid fa-magnifying-glass me-1 ms-3"></i>Consultar</a></li>
+                    <li> <a href="<?php echo BASE_URL ?>usuario/cadastrar"><i class="fa-regular fa-square-plus me-1 ms-3"></i> Cadastrar</a></li>
+                    <li> <a href="<?php echo BASE_URL ?>usuario/1"><i class="fa-solid fa-magnifying-glass me-1 ms-3"></i>Consultar</a></li>
                 </ul>
-            </li>
-            <li class="nav-item">
-                <a href="<?php echo BASE_URL ?>sair" class="nav-link" aria-current="page">
-                    <i class="fa-solid fa-arrow-right-from-bracket me-1"></i>
-                    Sair
-                </a>
             </li>
         </ul>
         <footer class="text-center ">
@@ -122,7 +116,7 @@
                                 <?php echo usuarioController::getInstance()->getNome(); ?>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="usuario/editar/<?php echo usuarioController::getInstance()->getId(); ?>"><i class="fa-solid fa-user-pen me-1"></i>Editar Perfil</a></li>
+                                <li><a class="dropdown-item" href="usuario/editar/<?php echo md5(usuarioController::getInstance()->getId()); ?>"><i class="fa-solid fa-user-pen me-1"></i>Editar Perfil</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>

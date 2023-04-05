@@ -6,7 +6,7 @@
                 <ol class="breadcrumb p-2 rounded">
                     <li class="breadcrumb-item" aria-current="page"><a href="<?php echo BASE_URL ?>"> <i class="fa-solid fa-mug-hot me-1"></i>Página Inicial</a></li>
                     <li class="breadcrumb-item" aria-current="page"><a href="<?php echo BASE_URL ?>usuario/1"> <i class="fa-solid fa-users me-1"></i> Usuários</a></li>
-                    <li class="breadcrumb-item " aria-current="page "><i class="fa-regular fa-pencil-alt me-1"></i>
+                    <li class="breadcrumb-item " aria-current="page "><i class="fa fa-pencil-alt me-1"></i>
                         Editar </li>
                 </ol>
             </nav>
@@ -24,7 +24,7 @@
         <?php }
             } ?>
         <form method="POST" name="nFormUsuario" enctype="multipart/form-data" id="usuario-form" autocomplete="off">
-            <input type="hidden" id="iCod" value="<?php echo (!empty($arrayCad['cod'])) ? $arrayCad['cod'] : ''; ?>" name="nCod">
+            <input type="hidden" id="iCod" value="<?php echo (!empty($arrayCad['id'])) ? $arrayCad['id'] : ''; ?>" name="nCod">
             <div class="col">
                 <div class="card">
                     <div class="card-header">
@@ -59,14 +59,25 @@
                                         <label for="iSenha" class="form-label">Senha:</label>
                                         <input type="password" class="form-control" id="iSenha" name="nSenha" placeholder="Exemplo: **********" minlength="8">
                                         <div class="invalid-feedback">
-                                            Informe a senha
+                                            Informe a senha, com no minimo 8 digitos
                                         </div>
                                     </div>
                                     <div class="col-md-12 mt-1">
                                         <label for="iRSenha" class="form-label">Repetir Senha:</label>
                                         <input type="password" class="form-control" id="iRSenha" name="nRSenha" placeholder="Exemplo: **********" minlength="8">
                                         <div class="invalid-feedback">
-                                            Repita a senha
+                                            Repita a senha, igual ao campo senha
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mt-2 mb-2">
+                                        <label for="istatus">Status: </label><br />
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="nStatus" id="iStatus1" value="1" <?php echo !empty($arrayCad['status']) ? 'checked' : ''; ?>>
+                                            <label class="form-check-label" for="iStatus1">Ativo</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="nStatus" id="iStatus2" value="0" <?php echo empty($arrayCad['status']) ? 'checked' : ''; ?>>
+                                            <label class="form-check-label" for="iStatus2">Inativo</label>
                                         </div>
                                     </div>
                                 </div>
@@ -74,13 +85,12 @@
                             <div class="col-md-6 align-align-middle">
                                 <div class="row">
                                     <div class="col-md-12 mt-1 text-center">
-                                        <div class="img-thumbnail rounded-circle mt-1 mt-md-5" id="imageUser" style="
-                                        <?php echo (!empty($arrayCad['anexo'])) ? 'background-image: url(' . BASE_URL . $arrayCad['anexo'] . ');' : ''; ?>"></div>
+                                        <div class="img-thumbnail rounded-circle mt-1 mt-md-5" id="imageUser" style="<?php echo (!empty($arrayCad['anexo'])) ? 'background-image: url(' . BASE_URL . $arrayCad['anexo'] . ');' : ''; ?>"></div>
                                         <div class="m-auto mt-2 mb-2 btn btn-outline-primary" id="imagemPadrao">Imagem padrão</div>
                                     </div>
                                     <div class="col-md-12 mt-1">
                                         <label for="iLinkAnexo" class="form-label">Anexo imagem:</label>
-                                        <input type="text" class="form-control" id="iLinkAnexo" name="nLinkAnexo" placeholder="" value="<?php echo (!empty($arrayCad['anexo'])) ? $arrayCad['anexo'] : ''; ?>">
+                                        <input type="hidden" class="form-control" id="iLinkAnexo" name="nLinkAnexo" placeholder="" value="<?php echo (!empty($arrayCad['anexo'])) ? $arrayCad['anexo'] : ''; ?>">
                                     </div>
                                     <div class="col-md-12 mt-1">
                                         <input type="file" class="form-control" name="nAnexo" id="iAnexo">

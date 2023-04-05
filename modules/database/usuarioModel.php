@@ -40,19 +40,40 @@ class usuarioModel extends database
     public function create($data)
     {
         try {
-            $sql = $this->db->prepare('INSERT INTO usuario (nome, nome_completo, email, senha, anexo) VALUES (:nome, :nome_completo, :email, :senha, :anexo)');
+            $sql = $this->db->prepare('INSERT INTO usuario (nome, nome_completo, email, senha, anexo, status) VALUES (:nome, :nome_completo, :email, :senha, :anexo, :status)');
             $sql->bindValue(":nome", $data['nome']);
             $sql->bindValue(":nome_completo", $data['nome_completo']);
             $sql->bindValue(":email", $data['email']);
             $sql->bindValue(":senha", $data['senha']);
             $sql->bindValue(":anexo", $data['anexo']);
+            $sql->bindValue(":status", $data['status']);
             $sql->execute();
             return true;
         } catch (PDOException $ex) {
             die($ex->getMessage());
+            return false;
         }
     }
 
+    /**
+     * Está função é responsável para remover usuario;
+     * @param Integer $id - id do usuario;
+     * @access public
+     * @return boolean 
+     * @author Joab Torres <joabtorres1508@gmail.com>
+     */
+    public function remove($id)
+    {
+        try {
+            $sql = $this->db->prepare('DELETE FROM usuario WHERE id=:id');
+            $sql->bindValue(":id", $id);
+            $sql->execute();
+            return true;
+        } catch (PDOException $ex) {
+            die($ex->getMessage());
+            return false;
+        }
+    }
     /**
      * Está função é responsável para altera um registro específico;
      * @param String $sql_command  - Comando SQL;
@@ -75,12 +96,13 @@ class usuarioModel extends database
             $sql->bindValue(':email', $data['email']);
             //verifica se foi setado a nova senha
             if (isset($data['senha']) && !empty($data['senha'])) {
-                $sql->bindValue(':senha', md5(sha1($data['senha'])));
+                $sql->bindValue(':senha', $data['senha']);
             }
             $sql->bindValue(':status', $data['status']);
             $sql->bindValue(':anexo', $data['anexo']);
             $sql->bindValue(':id', $data['id']);
             $sql->execute();
+            return true;
         } catch (PDOException $ex) {
             echo $ex->getMessage();
             return null;
@@ -95,7 +117,7 @@ class usuarioModel extends database
      * @return array $sql->fetch() [caso encontre] | bollean FALSE [caso contrário] 
      * @author Joab Torres <joabtorres1508@gmail.com>
      */
-    public function usuario_especifico ($sql_command, $data)
+    public function usuario_especifico($sql_command, $data)
     {
         if (!empty($data)) {
             $sql = $this->db->prepare($sql_command);

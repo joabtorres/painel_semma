@@ -55,18 +55,29 @@
                                             Informe o email
                                         </div>
                                     </div>
-                                    <div class="col-md-12 mt-1">
+                                    <div class="col-md-12 mt-1 csenha">
                                         <label for="iSenha" class="form-label">Senha:</label>
                                         <input type="password" class="form-control" id="iSenha" name="nSenha" placeholder="Exemplo: **********" minlength="8" required>
                                         <div class="invalid-feedback">
-                                            Informe a senha
+                                            Informe a senha, com no minimo 8 digitos
                                         </div>
                                     </div>
-                                    <div class="col-md-12 mt-1">
+                                    <div class="col-md-12 mt-1 crsenha">
                                         <label for="iRSenha" class="form-label">Repetir Senha:</label>
                                         <input type="password" class="form-control" id="iRSenha" name="nRSenha" placeholder="Exemplo: **********" minlength="8" required>
                                         <div class="invalid-feedback">
-                                            Repita a senha
+                                            Repita a senha, igual ao campo senha
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mt-2 mb-2">
+                                        <label for="istatus">Status: </label><br />
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="nStatus" id="iStatus1" required value="1" <?php echo (isset($arrayCad['status']) && empty($arrayCad['status'])) ? 'checked' : ''; ?>>
+                                            <label class="form-check-label" for="iStatus1">Ativo</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="nStatus" id="iStatus2" required value="0" <?php echo (isset($arrayCad['status']) && empty($arrayCad['status'])) ? 'checked' : ''; ?>>
+                                            <label class="form-check-label" for="iStatus2">Inativo</label>
                                         </div>
                                     </div>
                                 </div>
@@ -80,7 +91,7 @@
                                     </div>
                                     <div class="col-md-12 mt-1">
                                         <label for="iLinkAnexo" class="form-label">Anexo imagem:</label>
-                                        <input type="text" class="form-control" id="iLinkAnexo" name="nLinkAnexo" placeholder="" value="<?php echo (!empty($arrayCad['anexo'])) ? $arrayCad['anexo'] : ''; ?>">
+                                        <input type="hidden" class="form-control" id="iLinkAnexo" name="nLinkAnexo" placeholder="" value="<?php echo (!empty($arrayCad['anexo'])) ? $arrayCad['anexo'] : ''; ?>">
                                     </div>
                                     <div class="col-md-12 mt-1">
                                         <input type="file" class="form-control" name="nAnexo" id="iAnexo">
