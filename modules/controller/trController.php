@@ -37,7 +37,6 @@ class trController
             $arrayCad['id'] = filter_input(INPUT_POST, 'nCod', FILTER_SANITIZE_SPECIAL_CHARS);
             $crudModel = crudModel::getInstance();
             $cadHistorico = $crudModel->update("UPDATE termos_de_referencia SET tipo=:tipo, data=:data, status=:status, descricao=:descricao, anexo=:anexo WHERE id=:id", $arrayCad);
-            
             if ($cadHistorico) {
                 $_SESSION['historico_acao'] = true;
                 $url = BASE_URL . "tr/editar/" . md5($arrayCad['id']);

@@ -56,9 +56,6 @@
                                                 }
                                             ?>
                                         </select>
-                                        <div class="invalid-feedback">
-                                            Informe o status
-                                        </div>
                                     </div>
                                     <div class="col-md-12 mt-1">
                                         <label for="iData" class="form-label">Data:</label>
